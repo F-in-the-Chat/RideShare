@@ -1,4 +1,4 @@
-# Temp
+# RideShare
 Ridesharing app project
 
 ### Basic Wireframe
