@@ -1,11 +1,8 @@
 /* //previous work from a different course so good starting spot
-
 $('#login').on('submit', function (e) {
     e.preventDefault();
-
     let mail = $('#email').val();
     let secret = $('#pass').val();
-
     $.ajax({
         type: "POST",
         url:  "/login",
