@@ -10,6 +10,7 @@
 * userId: Int
 * token: String
 * tokenExpiration: Int
+* driver: boolean
 
 #### The login request is as follows:
 
@@ -21,26 +22,29 @@ query{
         tokenExpiration
     }
 }
+
+mutation{
+  createUser(userInput: {email:"gg@gmail.com", password:"getrekt"}) {
+    userId
+    email
+  }
+}
+{
+  "errors": 
+  [{"message": "User already exists."}]
+} 
 ```
 
 #### Once this information is taken, the data is then passed and stored in the following format:
 
 ```
 {
-    "_id": "617208e33b1d1060b549484e",
-    "title": "Ride F",
-    "date": "2021-10-22T00:38:33.023Z",
-    "pickup": "Springfield",
-    "dropoff": "Boston",
-    "capacity": 5,
-    "price": 25,
-    "preferences": "No food"
-
-    "email": "gg@gmail.com"
-    "password": "getrekt"
-    "userId": 007
-    "token": "asdjhiowwandjncei72q98erhfdjsbaw"
-    "tokenExpiration": 2
+    "email": "gg@gmail.com",
+    "password": "getrekt",
+    "userId": 007,
+    "token": "asdjhiowwandjncei72q98erhfdjsbaw",
+    "tokenExpiration": 2,
+    driver: True
 }
 ```
 
