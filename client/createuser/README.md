@@ -1,6 +1,6 @@
 ## Create Ride Microservice
 
-#### 1. Developer Name - Roshan Praveen Shetty
+### 1. Developer Name - Roshan Praveen Shetty
 
 ### 2. Overview of service:
 #### This service aims to create rides where the person creating the ride is the one who owns the car and will also be the driver. The endpoint takes into consideration basic details which are as follows:
@@ -45,7 +45,7 @@ mutation{
 }
 ```
 
-#### Basic Status codes are used for this end:
+### 3. Basic Status codes are used for this end:
 
 * 200: OK success status response code indicates that the request has succeeded
 * 201: The request has been fulfilled and resulted in a new resource being created
