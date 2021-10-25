@@ -1,4 +1,4 @@
-//previous work from a different course so good starting spot
+/* //previous work from a different course so good starting spot
 
 $('#login').on('submit', function (e) {
     e.preventDefault();
@@ -23,4 +23,4 @@ $('#login').on('submit', function (e) {
             alert("An error occurred, Please try again.");
         }                  
     });
-})
+}) */
