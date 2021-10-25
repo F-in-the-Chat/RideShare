@@ -24,7 +24,7 @@ query{
 }
 
 mutation{
-  createUser(userInput: {email:"gg@gmail.com", password:"getrekt"}) {
+  createUser(userInput: {email:"gg@gmail.com", password:"getrekt", driver: True}) {
     userId
     email
   }
