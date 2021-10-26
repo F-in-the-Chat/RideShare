@@ -12,7 +12,7 @@
 
 ```
 mutation{
-  deleteRide(rideInput: {userID: int}) {
+  deleteRide(rideInput: "sdfrweirw0e234234"}) {
     ride
     user
   }
