@@ -12,6 +12,5 @@ app.get("/join", (req, res) => {
     let user = req.body["user"]
     let ride = req.body["ride"]
     //Write user and ride to DB
-    //Send event for ride joined
-    res.send({ Status: "Success" });
+    res.send({ status: "OK" });
 });
