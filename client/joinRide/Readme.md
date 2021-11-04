@@ -5,7 +5,7 @@
 ### 2. Overview of service:
 #### This service allows riders to join rides that have been created by a driver:
 
-* User Id: Numbe identifying the user trying to join the ride (Required Field)
+* User Id: Number identifying the user trying to join the ride (Required Field)
 * Ride Id: Number identifying the ride the user is trying to join (Required Field)
 
 #### The request is as follows:
