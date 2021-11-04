@@ -21,3 +21,38 @@ $('#login').on('submit', function (e) {
         }                  
     });
 }) */
+
+const express = require("express");
+
+const app = express();
+
+// all might be post since token needs to be added and removed for login and logout respectively
+
+app.get('.../login/', (req,res) => { // get request. we are only check with database, no changes made? maybe token
+    // check for username/email 
+    try{
+
+    }
+    catch (err){
+
+    }
+})
+
+app.post('.../signup/', (req,res) => { //post request bc we are adding to database
+    // check for username/email
+    try{
+
+    }
+    catch (err){
+
+    }
+})
+
+app.get('.../logout/', (req,res) => { // get request. we are only check with database, no changes made? maybe token
+    try{
+
+    }
+    catch (err){
+
+    }
+})
