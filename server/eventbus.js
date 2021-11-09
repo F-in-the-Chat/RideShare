@@ -5,7 +5,8 @@ const port = 5002;
 app.use(express.json());
 
 //JS Object containing the events and addresses intrested in the events in the format {event:[address1,address2,...]}
-let event_subs = {};
+//Add default addresses here
+let event_subs = {"test":["http://localhost:5001/events"]};
 
 app.listen(port, "0.0.0.0", () => {
   console.log(`Event Bus listening at http://localhost:${port}`);
