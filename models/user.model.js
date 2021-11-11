@@ -14,7 +14,7 @@ const UserSchema = mongoose.Schema({
       required: true,
   },
   tokenTimer:{
-      type: Float64Array,
+      type: Number,
       required: false,
   },
   driver:{
@@ -22,7 +22,7 @@ const UserSchema = mongoose.Schema({
       required: true,
   },
   userId:{
-      type: Int32Array,
+      type: Number,
       required: true,
   }
 });
