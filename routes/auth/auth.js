@@ -12,11 +12,9 @@ const dotenv = require('dotenv');
 dotenv.config();
 process.env.TOKEN_SECRET;
 
-app.post('/login/', (req,res) => { // get request. we are only check with database, no changes made? maybe token
+app.post('/login/', (req,res) => { 
     let username = req.body["user"];
     let secret = req.body["password"];
-    //let username = "gg@gmail.com";
-    //let secret = "getRekted";
     try{
         let info = db.inventory.find({email:username}) //id, email, password
         //check username if username exists in database, checks password
@@ -42,10 +40,8 @@ app.post('/login/', (req,res) => { // get request. we are only check with databa
 
 app.post('/signup/', (req,res) => { //post request bc we are adding to database
     // check for username/email
-    let username = req.body.username;
-    let password = req.body.password;
-    //check username if username exists in database
-    // throw new Error("Username already exist")
+    let username = req.body["user"];
+    let secret = req.body["password"];
     try{
         let test = db.users.find({email:username})
         if(!isNull(test)){
@@ -56,20 +52,34 @@ app.post('/signup/', (req,res) => { //post request bc we are adding to database
         res.status().send(err);
     }
     try{
-        db.collection('users').InsertOne( { token: coin, tokenTimer: 1800 } ).then(function(result) {})
+        let coin = jwt.sign(username, process.env.TOKEN_SECRET, { expiresIn: '1800s' })
+        db.collection('users').InsertOne({
+            email: username,
+            password: secret,
+            token: coin, 
+            tokenTimer: 1800,
+            driver: req.body["driver"],
+            user: 0,
+             } ).then(function(result) {})
+        res.send({status: "Signup successful"});
     }
     catch (err){
-        
+        res.status().send(err);
     }
 })
 
 app.post('/logout/', (req,res) => { 
-    // let token = req.body.token
-    // throw new Error("Logout unsuccessful")
+
+    let username = req.body["user"];
+    let coin = jwt.sign(username, process.env.TOKEN_SECRET, { expiresIn: '1800s' })
     try{
-        //req.isAuth = false;
+        if(coin!=db.inventory.find({email:username}).token){
+            throw new Error("Token mismatched")
+        }
+        db.collection('users').updateOne( { token: "", tokenTimer: 0 } ).then(function(result) {})
+        res.send({status: "Logout successful"});
     }
     catch (err){
-        
+        res.status().send(err);
     }
 })
