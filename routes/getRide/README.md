@@ -1,36 +1,31 @@
-## Authentication Microservice
+=======
+## Delete Ride Microservice
 
-### 1. Developer Name - Eric
+### 1. Developer Name - Roshan Praveen Shetty
 
 ### 2. Overview of service:
-#### This service aims to get ride information for a specific ride id. The endpoint takes into consideration basic details which are as follows:
 
-* Title: String Input (Required Field)
-* Date: Date Input (Required Field)
-* Pickup: String Input (Required Field)
-* Dropoff: String Input (Required Field)
-* Capacity: Int Input (Required Field)
-* Price: Int Input (Required Field)
-* Preferences: String Input
+#### This service displays all the rides. The endpoint requires no input.
 
-#### The get rides request is as follows:
+#### The request is as follows:
 
 ```
-query{
-  getRide(userInput: {_id: 0002}) {
-    _id
-    title
-    date
-    pickup
-    dropoff
-    capacity
-    price
-    preferences
-  }
-}
+app.get("/getRide", (req, res) => {
+  Ride.find()
+    .then((rides) => {
+      res.send(rides);
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: err.message || "Something wrong while retrieving rides.",
+      });
+    });
+});
+
+>>>>>>> 9b6797d7c28f3d84d8e31e93d5844389e77e19cc
 ```
 
 ### 3. Basic Status codes are used for this end:
-
-* 200: OK success status response code indicates that the request has succeeded
-* 201: The request has been fulfilled and resulted in a new resource being created
+=======
+* 500: Indicates that the server encountered an unexpected condition that prevented it from fulfilling the request.
+>>>>>>> 9b6797d7c28f3d84d8e31e93d5844389e77e19cc
