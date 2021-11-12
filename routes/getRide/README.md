@@ -1,4 +1,3 @@
-=======
 ## Delete Ride Microservice
 
 ### 1. Developer Name - Roshan Praveen Shetty
@@ -21,11 +20,8 @@ app.get("/getRide", (req, res) => {
       });
     });
 });
-
->>>>>>> 9b6797d7c28f3d84d8e31e93d5844389e77e19cc
 ```
 
 ### 3. Basic Status codes are used for this end:
-=======
 * 500: Indicates that the server encountered an unexpected condition that prevented it from fulfilling the request.
->>>>>>> 9b6797d7c28f3d84d8e31e93d5844389e77e19cc
+
