@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Switch } from "react-router";
 import Rides from "./pages/Rides";
 import CreateRide from "./pages/CreateRide";
-import BookedRides from "./pages/BookedRides";
+import JoinedRides from "./pages/JoinedRides";
 import Layout from "./component/layout/Layout";
 
 function App() {
@@ -16,8 +16,8 @@ function App() {
         <Route path="/create-ride">
           <CreateRide />
         </Route>
-        <Route path="/booked-rides">
-          <BookedRides />
+        <Route path="/joined-rides">
+          <JoinedRides />
         </Route>
       </Switch>
     </Layout>

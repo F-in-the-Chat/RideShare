@@ -16,7 +16,7 @@ function Navbar() {
             <Link to="/create-ride">Create Ride</Link>
           </li>
           <li>
-            <Link to="/booked-rides">Booked Rides</Link>
+            <Link to="/joined-rides">Joined Rides</Link>
           </li>
         </ul>
       </nav>
