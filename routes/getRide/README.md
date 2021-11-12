@@ -20,9 +20,8 @@ app.get("/getRide", (req, res) => {
       });
     });
 });
-
 ```
 
 ### 3. Basic Status codes are used for this end:
-
 * 500: Indicates that the server encountered an unexpected condition that prevented it from fulfilling the request.
+
