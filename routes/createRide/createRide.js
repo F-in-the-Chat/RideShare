@@ -35,15 +35,17 @@ app.post("/createRide", (req, res) => {
     preferences: req.body.preferences,
   });
 
-  // Save Note in the database
-  // ride.save()
-  // .then(data => {
-  //     res.send(data);
-  // }).catch(err => {
-  //     res.status(500).send({
-  //         message: err.message || "Some error occurred while creating the Ride."
-  //     });
-  // });
+  // Save Ride in the database
+  ride
+    .save()
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: err.message || "Some error occurred while creating the Ride.",
+      });
+    });
 });
 
 app.post("/events", (req, res) => {
