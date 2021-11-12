@@ -3,6 +3,8 @@ const axios = require("axios");
 const app = express();
 const port = 5004;
 
+const Ride = require("../../models/ride.model");
+
 app.use(express.json());
 
 app.listen(port, "0.0.0.0", () => {
@@ -18,13 +20,13 @@ app.listen(port, "0.0.0.0", () => {
 });
 
 app.get("/getRide", (req, res) => {
-  Product.find()
-    .then((products) => {
-      res.send(products);
+  Ride.find()
+    .then((rides) => {
+      res.send(rides);
     })
     .catch((err) => {
       res.status(500).send({
-        message: err.message || "Something wrong while retrieving products.",
+        message: err.message || "Something wrong while retrieving rides.",
       });
     });
 });

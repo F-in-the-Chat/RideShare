@@ -4,21 +4,23 @@
 
 ### 2. Overview of service:
 
-#### This service displays all the rides. The endpoint requires no input:
+#### This service displays all the rides. The endpoint requires no input.
 
 #### The request is as follows:
 
 ```
-app.get('/getRide', (req, res) => {
-    Product.find()
-    .then(products => {
-        res.send(products);
-    }).catch(err => {
-        res.status(500).send({
-            message: err.message || "Something wrong while retrieving products."
-        });
+app.get("/getRide", (req, res) => {
+  Ride.find()
+    .then((rides) => {
+      res.send(rides);
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: err.message || "Something wrong while retrieving rides.",
+      });
     });
-})
+});
+
 ```
 
 ### 3. Basic Status codes are used for this end:
