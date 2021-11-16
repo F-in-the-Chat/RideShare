@@ -6,7 +6,7 @@
 ## Create Rides Page
 ![image](https://user-images.githubusercontent.com/47758717/139809383-cf9177b4-462d-49eb-9da6-9c3f740a2dfb.png)
 
-## Booked Rides Page
+## Joined Rides Page
 ![image](https://user-images.githubusercontent.com/47758717/139809475-d9d80d01-2001-401c-9711-28eb083655c3.png)
 
 ### Technologies used:
