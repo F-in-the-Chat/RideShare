@@ -2,6 +2,8 @@ import React from "react";
 import { Route, Switch } from "react-router";
 import Rides from "./pages/Rides";
 import CreateRide from "./pages/CreateRide";
+import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
 import JoinedRides from "./pages/JoinedRides";
 import Layout from "./component/layout/Layout";
 
@@ -18,6 +20,12 @@ function App() {
         </Route>
         <Route path="/joined-rides">
           <JoinedRides />
+        </Route>
+        <Route path="/login">
+          <SignIn/>
+        </Route>
+        <Route path="/join">
+          <SignUp/>
         </Route>
       </Switch>
     </Layout>
