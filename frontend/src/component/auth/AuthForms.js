@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import Card from "../ui/Card";
 import classes from "./AuthForms.module.css";
+import axios from "axios";
 
 function SignInForm() {
   // Retrieve data from in the input fields once
@@ -11,10 +12,14 @@ function SignInForm() {
     // Prevents browser default
     event.preventDefault();
     let formData = {
-      username:username,
+      user:username,
       password:password
     }
-    //Submit Form data through ajax request to server endpoint
+    //Submit Form data through axios request to server endpoint
+    axios.post("http://localhost:5004/login", formData)
+    .catch((err) => {
+      console.log(err.message);
+    });
   };
   return (
     <Card>
@@ -45,11 +50,15 @@ export function SignUpForm() {
     // Prevents browser default
     event.preventDefault();
     let formData = {
-      username:username,
+      user:username,
       password:password,
       email:email
     }
-    //Submit Form data through ajax request to server endpoint
+    //Submit Form data through axios request to server endpoint
+    axios.post("http://localhost:5004/signup", formData)
+    .catch((err) => {
+      console.log(err.message);
+    });
   };
   return (
     <Card>
