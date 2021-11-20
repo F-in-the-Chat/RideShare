@@ -7,10 +7,10 @@
 
 * email: String Input (Required Field)
 * password: String Input (Required Field)
-* userId: Int
 * token: String
 * tokenExpiration: Int
 * driver: boolean
+* userId: Int
 
 #### The login request is as follows:
 
@@ -41,10 +41,10 @@ mutation{
 {
     "email": "gg@gmail.com",
     "password": "getrekt",
-    "userId": 007,
     "token": "asdjhiowwandjncei72q98erhfdjsbaw",
     "tokenExpiration": 2,
-    driver: True
+    driver: True,
+    "userId": 007
 }
 ```
 
