@@ -36,7 +36,8 @@ app.post('/login/', (req,res) => {
         // create token
         let coin = jwt.sign(username, process.env.TOKEN_SECRET, { expiresIn: '1800s' })
         db.collection('users').updateOne( { token: coin, tokenTimer: 1800 } ).then(function(result) {}) // I don't understand this then function thing but it was there
-        res.send({status: "Login successful"});
+        res.send("Login successful");
+        res.redirect('/getRide'); // redirects to join rides
     } catch (err){
         res.status().send(err);
     }
@@ -67,6 +68,7 @@ app.post('/signup/', (req,res) => { //post request bc we are adding to database
             user: 0,
              } ).then(function(result) {})
         res.send({status: "Signup successful"});
+        res.redirect('/getRide'); // redirects to join rides
     }
     catch (err){
         res.status().send(err);
