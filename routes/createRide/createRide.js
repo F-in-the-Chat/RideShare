@@ -2,7 +2,7 @@ const Ride = require("../../models/ride.model");
 const express = require("express");
 const axios = require("axios");
 const app = express();
-const cors = require('cors');
+const cors = require("cors");
 const port = 5003;
 
 app.use(express.json());
@@ -21,6 +21,7 @@ app.listen(port, "0.0.0.0", () => {
 });
 
 app.post("/createRide", (req, res) => {
+  console.log(req.body.content);
   if (!req.body.content) {
     return res.status(400).send({
       message: "Ride content cannot be empty",
@@ -37,6 +38,8 @@ app.post("/createRide", (req, res) => {
     price: req.body.price,
     preferences: req.body.preferences,
   });
+
+  console.log(ride);
 
   // Save Ride in the database
   ride

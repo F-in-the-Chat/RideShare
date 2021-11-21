@@ -24,6 +24,7 @@ function CreateRideForm(props) {
     const preferences = preferencesElRef.current.value;
 
     const ride = { title, date, pickup, dropoff, capacity, price, preferences };
+    console.log(ride);
     props.onCreateRide(ride);
   };
   return (
