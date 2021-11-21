@@ -1,9 +1,10 @@
 import React, { useState } from "react"; // useRef
+import { Link } from "react-router-dom";
 import Card from "../ui/Card";
 import classes from "./AuthForms.module.css";
 import axios from "axios";
 
-function SignInForm() {
+export function SignInForm() {
   // Retrieve data from in the input fields once
   const [username,setUsername] = useState("")
   const [password,setPassword] = useState("")
@@ -35,6 +36,7 @@ function SignInForm() {
         <div className={classes.actions}>
           <button>Login</button>
         </div>
+        <small>Or <Link to="/join">Sign Up</Link></small>
       </form>
     </Card>
   );
@@ -78,9 +80,9 @@ export function SignUpForm() {
         <div className={classes.actions}>
           <button>Sign Up</button>
         </div>
+        <small>Or <Link to="/login">Sign In</Link></small>
       </form>
     </Card>
   );
 }
 
-export default SignInForm;

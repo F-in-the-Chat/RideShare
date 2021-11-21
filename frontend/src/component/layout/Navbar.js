@@ -10,7 +10,7 @@ function Navbar() {
       <nav>
         <ul>
           <li>
-            <Link to="/">Rides</Link>
+            <Link to="/rides">Rides</Link>
           </li>
           <li>
             <Link to="/create-ride">Create Ride</Link>
@@ -20,6 +20,9 @@ function Navbar() {
           </li>
           <li>
             <Link to="/delete-ride">Delete Rides</Link>
+          </li>
+          <li>
+            <Link to="/login">Log In</Link>
           </li>
         </ul>
       </nav>

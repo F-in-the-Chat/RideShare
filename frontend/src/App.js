@@ -19,6 +19,9 @@ function App() {
       <Switch>
         {/* When true, will only match if the path matches the location.pathname exactly. */}
         <Route path="/" exact>
+          <SignIn />
+        </Route>
+        <Route path="/rides">
           <Rides />
         </Route>
         <Route path="/create-ride">
