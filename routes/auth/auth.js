@@ -4,7 +4,8 @@ const { MongoClient } = require("mongodb");
 const port = 5004;
 var url = "mongodb+srv://testlogin.taf1q.mongodb.net/myFirstDatabase?authSource=%24external&authMechanism=MONGODB-X509&retryWrites=true&w=majority";
 const client = new MongoClient(url);
-await client.connect();
+//await client.connect();
+client.connect();
 
 const jwt = require("jsonwebtoken");
 TOKEN_SECRET = F1n7hEcH47; //FInTheChat
@@ -15,7 +16,7 @@ process.env.TOKEN_SECRET;
 
 app.listen(port, "0.0.0.0", () => {
     console.log(`Auth Server listening at http://localhost:${port}`);
-  });
+});
 
 app.post('/login/', (req,res) => { 
     let username = req.body["user"];

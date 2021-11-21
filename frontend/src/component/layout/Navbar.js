@@ -18,6 +18,9 @@ function Navbar() {
           <li>
             <Link to="/joined-rides">Joined Rides</Link>
           </li>
+          <li>
+            <Link to="/delete-ride">Delete Rides</Link>
+          </li>
         </ul>
       </nav>
     </header>

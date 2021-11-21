@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import Card from "../ui/Card";
 import classes from "./CreateRideForm.module.css";
 
-function CreateRideForm() {
+function CreateRideForm(props) {
   // Retrieve data from in the input fields once
   const titleElRef = useRef();
   const dateElRef = useRef();
@@ -24,7 +24,7 @@ function CreateRideForm() {
     const preferences = preferencesElRef.current.value;
 
     const ride = { title, date, pickup, dropoff, capacity, price, preferences };
-    console.log(ride);
+    props.onCreateRide(ride);
   };
   return (
     <Card>

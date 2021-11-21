@@ -7,6 +7,7 @@ import SignUp from "./pages/SignUp";
 import JoinedRides from "./pages/JoinedRides";
 import Layout from "./component/layout/Layout";
 import TokenContext from "./AppContext"
+import DeleteRide from "./pages/DeleteRide";
 
 function App() {
   const testContext = useContext(TokenContext)
@@ -26,11 +27,14 @@ function App() {
         <Route path="/joined-rides">
           <JoinedRides />
         </Route>
+        <Route path="/delete-ride">
+          <DeleteRide />
+        </Route>
         <Route path="/login">
-          <SignIn/>
+          <SignIn />
         </Route>
         <Route path="/join">
-          <SignUp/>
+          <SignUp />
         </Route>
       </Switch>
     </Layout>
