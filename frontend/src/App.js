@@ -6,6 +6,7 @@ import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import JoinedRides from "./pages/JoinedRides";
 import Layout from "./component/layout/Layout";
+import DeleteRide from "./pages/DeleteRide";
 
 function App() {
   return (
@@ -25,10 +26,10 @@ function App() {
           <DeleteRide />
         </Route>
         <Route path="/login">
-          <SignIn/>
+          <SignIn />
         </Route>
         <Route path="/join">
-          <SignUp/>
+          <SignUp />
         </Route>
       </Switch>
     </Layout>
