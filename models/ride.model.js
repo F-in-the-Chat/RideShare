@@ -29,6 +29,11 @@ const RideSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  riders: {
+    type: Array,
+    required:false,
+    default:[],
+  },
   //   creator: {
   //     type: Schema.Types.ObjectId,
   //     ref: "User",
