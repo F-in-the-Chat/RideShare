@@ -21,6 +21,9 @@ function App() {
         <Route path="/joined-rides">
           <JoinedRides />
         </Route>
+        <Route path="/delete-ride">
+          <DeleteRide />
+        </Route>
         <Route path="/login">
           <SignIn/>
         </Route>
