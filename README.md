@@ -1,25 +1,5 @@
-## Delete Ride Microservice
+# RideShare
+Rideshare is a web application that allows people to share rides to common destinations through a sophisticated portal.
 
-### 1. Developer Name - Rishab Maheshwari
-
-### 2. Overview of service:
-
-#### This service aims to delete rides incase the driver does not want that group any longer. The endpoint requires:
-
-* creatorID: int (Required Field)
-
-#### The request is as follows:
-
-```
-mutation{
-  deleteRide(rideInput: "sdfrweirw0e234234"}) {
-    ride
-    user
-  }
-}
-```
-
-### 3. Basic Status codes are used for this end:
-
-* 200: OK success status response code indicates that the request has succeeded
-* 201: The request has been fulfilled and resulted in a new resource being created
+### Basic Wireframe
+![1](https://user-images.githubusercontent.com/47758717/136993252-ffad24ca-403d-40c7-9fdc-191b6d8812c2.jpeg)
