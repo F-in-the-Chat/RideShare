@@ -22,7 +22,9 @@ app.listen(port, "0.0.0.0", () => {
 });
 
 app.post("/createRide", (req, res) => {
-  eventHelper.sendEvent("createRide",req.body)
+  eventHelper.sendEvent("createRide",req.body,(resp)=>{
+    //Callback code here
+  })
 })
   
 

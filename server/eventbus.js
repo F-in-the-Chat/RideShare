@@ -25,15 +25,7 @@ app.listen(port, "0.0.0.0", () => {
   }
 */
 
-app.post("/events", (req, res) => {
-  const event = req.body;
-  event_subs[event.name].forEach((sub) => {
-    axios.post(sub, event).catch((err) => {
-      console.log(err.message);
-    });
-  });
-  res.send({ status: "OK" });
-});
+app.post("/events",eventHandler);
 //Endpoint for microservices to subscribe to certain events
 app.post("/subscribe", (req, res) => {
   const address = req.body.address;
@@ -46,3 +38,14 @@ app.post("/subscribe", (req, res) => {
   res.send({ status: "OK" });
 });
 
+function eventHandler(req,res){
+  const event = req.body;
+  event_subs[event.name].forEach((sub)=>handleEvent(sub,event,res));
+}
+
+async function handleEvent(sub,event,res){
+  let post = await axios.post(sub, event).catch((err) => {
+    console.log(err.message);
+  });
+  res.send(post.data)
+}
