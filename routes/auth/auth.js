@@ -1,14 +1,14 @@
 const express = require("express");
 const app = express();
-const { MongoClient } = require("mongodb");
+//const { MongoClient } = require("mongodb");
 const port = 5004;
-var url = "mongodb+srv://testlogin.taf1q.mongodb.net/myFirstDatabase?authSource=%24external&authMechanism=MONGODB-X509&retryWrites=true&w=majority";
-const client = new MongoClient(url);
+//var url = "mongodb+srv://testlogin.taf1q.mongodb.net/myFirstDatabase?authSource=%24external&authMechanism=MONGODB-X509&retryWrites=true&w=majority";
+//const client = new MongoClient(url);
 //await client.connect();
-client.connect();
+//client.connect();
 
 const jwt = require("jsonwebtoken");
-TOKEN_SECRET = F1n7hEcH47; //FInTheChat
+TOKEN_SECRET = "F1n7hEcH47"; //FInTheChat
 const dotenv = require('dotenv');
 
 dotenv.config();
@@ -22,7 +22,7 @@ app.post('/login', (req,res) => {
     let username = req.body["user"];
     let secret = req.body["password"];
     try{
-        let info = db.inventory.find({email:username}) //id, email, password
+        //let info = db.inventory.find({email:username}) //id, email, password
         //check username if username exists in database, checks password
         if (info.email!=username){
             throw new Error("Username doesn't exist")
