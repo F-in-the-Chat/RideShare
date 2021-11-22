@@ -17,9 +17,7 @@ function CreateRide() {
     //   history.replace("/rides");
     // });
     axios
-      .post("http://localhost:5003/createRide", {
-        ride,
-      })
+      .post("http://localhost:5003/createRide", { ride })
       .catch((err) => {
         console.log(err.message);
       })
