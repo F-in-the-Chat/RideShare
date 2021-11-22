@@ -36,7 +36,7 @@ export function SignInForm() {
         <div className={classes.actions}>
           <button>Login</button>
         </div>
-        <small>Or <Link to="/join">Sign Up</Link></small>
+        <small>Or <Link to="/signup">Sign Up</Link></small>
       </form>
     </Card>
   );

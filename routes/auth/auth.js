@@ -1,14 +1,14 @@
 const express = require("express");
 const app = express();
-const { MongoClient } = require("mongodb");
+//const { MongoClient } = require("mongodb");
 const port = 5004;
-var url = "mongodb+srv://testlogin.taf1q.mongodb.net/myFirstDatabase?authSource=%24external&authMechanism=MONGODB-X509&retryWrites=true&w=majority";
-const client = new MongoClient(url);
+//var url = "mongodb+srv://testlogin.taf1q.mongodb.net/myFirstDatabase?authSource=%24external&authMechanism=MONGODB-X509&retryWrites=true&w=majority";
+//const client = new MongoClient(url);
 //await client.connect();
-client.connect();
+//client.connect();
 
 const jwt = require("jsonwebtoken");
-TOKEN_SECRET = F1n7hEcH47; //FInTheChat
+TOKEN_SECRET = "F1n7hEcH47"; //FInTheChat
 const dotenv = require('dotenv');
 
 dotenv.config();
@@ -18,11 +18,11 @@ app.listen(port, "0.0.0.0", () => {
     console.log(`Auth Server listening at http://localhost:${port}`);
 });
 
-app.post('/login/', (req,res) => { 
+app.post('/login', (req,res) => { 
     let username = req.body["user"];
     let secret = req.body["password"];
     try{
-        let info = db.inventory.find({email:username}) //id, email, password
+        //let info = db.inventory.find({email:username}) //id, email, password
         //check username if username exists in database, checks password
         if (info.email!=username){
             throw new Error("Username doesn't exist")
@@ -45,7 +45,7 @@ app.post('/login/', (req,res) => {
 
 })
 
-app.post('/signup/', (req,res) => { //post request bc we are adding to database
+app.post('/signup', (req,res) => { //post request bc we are adding to database
     // check for username/email
     let username = req.body["user"];
     let secret = req.body["password"];
@@ -65,8 +65,8 @@ app.post('/signup/', (req,res) => { //post request bc we are adding to database
             password: secret,
             token: coin, 
             tokenTimer: 1800,
-            driver: req.body["driver"],
-            user: 0,
+            driver: false,
+            user: 01,
              } ).then(function(result) {})
         res.send({status: "Signup successful"});
         res.redirect('/getRide'); // redirects to join rides
@@ -76,7 +76,7 @@ app.post('/signup/', (req,res) => { //post request bc we are adding to database
     }
 })
 
-app.post('/logout/', (req,res) => { 
+app.post('/logout', (req,res) => { 
 
     let username = req.body["user"];
     let coin = jwt.sign(username, process.env.TOKEN_SECRET, { expiresIn: '1800s' })

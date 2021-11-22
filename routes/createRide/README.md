@@ -16,17 +16,20 @@
 #### The request is as follows:
 
 ```
-mutation{
-  createRide(rideInput: {title: "Ride F", date:"2021-10-22T00:38:33.023Z", pickup:"Springfield", dropoff:"Boston", capacity: 5, price: 25, preferences: "No food"}) {
-    _id
-    title
-    date
-    pickup
-    dropoff
-    capacity
-    price
-    preferences
-  }
+{
+  app.post("/createRide", (req, res) => {
+  console.log(req.body);
+
+  // Create Ride
+  const ride = new Ride({
+    title: req.body.title,
+    date: req.body.date,
+    pickup: req.body.pickup,
+    dropoff: req.body.dropoff,
+    capacity: req.body.capacity,
+    price: req.body.price,
+    preferences: req.body.preferences,
+  });
 }
 ```
 
