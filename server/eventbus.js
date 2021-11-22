@@ -8,7 +8,8 @@ app.use(express.json());
 //JS Object containing the events and addresses intrested in the events in the format {event:[address1,address2,...]}
 //Add default addresses here
 let event_subs = {"example":["http://localhost:5003/events"],
-  "test":["http://localhost:5000/events"]
+  "test":["http://localhost:5000/events"],
+  "createRide":["http://localhost:5000/events"],
 };
 
 app.listen(port, "0.0.0.0", () => {

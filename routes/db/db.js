@@ -12,6 +12,7 @@ const User = require("../../models/user.model")
 //Define Event Handlers here in the form "event name": handlerFunction
 const eventHandlers = {
     "test":testEventHandler,
+    "createRide":createRide,
 }
 
 app.listen(port, "0.0.0.0", () => {
@@ -34,4 +35,24 @@ async function main(event) {
 function testEventHandler(event){
     let q = User.find({})
     q.exec((q,r)=>{console.log(r)})
+}
+
+function createRide(event) {
+    const ride = new Ride({
+        title: event.data.ride.title,
+        date: event.data.ride.date,
+        pickup: event.data.ride.pickup,
+        dropoff: event.data.ride.dropoff,
+        capacity: event.data.ride.capacity,
+        price: event.data.ride.price,
+        preferences: event.data.ride.preferences,
+    });
+
+    //Save Ride in the database
+    ride.save()
+        .then((data) => {
+        })
+        .catch((err) => {
+            console.log(err)
+        });
 }
