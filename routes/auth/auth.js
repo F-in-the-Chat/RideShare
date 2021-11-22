@@ -18,7 +18,7 @@ app.listen(port, "0.0.0.0", () => {
     console.log(`Auth Server listening at http://localhost:${port}`);
 });
 
-app.post('/login/', (req,res) => { 
+app.post('/login', (req,res) => { 
     let username = req.body["user"];
     let secret = req.body["password"];
     try{
@@ -45,7 +45,7 @@ app.post('/login/', (req,res) => {
 
 })
 
-app.post('/signup/', (req,res) => { //post request bc we are adding to database
+app.post('/signup', (req,res) => { //post request bc we are adding to database
     // check for username/email
     let username = req.body["user"];
     let secret = req.body["password"];
@@ -76,7 +76,7 @@ app.post('/signup/', (req,res) => { //post request bc we are adding to database
     }
 })
 
-app.post('/logout/', (req,res) => { 
+app.post('/logout', (req,res) => { 
 
     let username = req.body["user"];
     let coin = jwt.sign(username, process.env.TOKEN_SECRET, { expiresIn: '1800s' })

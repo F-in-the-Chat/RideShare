@@ -17,7 +17,7 @@ export function SignInForm() {
       password:password
     }
     //Submit Form data through axios request to server endpoint
-    axios.post("http://localhost:5004/login", formData)
+    axios.post("http://localhost:3000/login", formData)
     .catch((err) => {
       console.log(err.message);
     });
