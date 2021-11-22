@@ -57,7 +57,7 @@ export function SignUpForm() {
       email:email
     }
     //Submit Form data through axios request to server endpoint
-    axios.post("http://localhost:5004/signup", formData)
+    axios.post("http://localhost:3000/signup", formData)
     .catch((err) => {
       console.log(err.message);
     });
