@@ -13,6 +13,8 @@ const dotenv = require('dotenv');
 dotenv.config();
 process.env.TOKEN_SECRET;
 
+const eventHelper = require(path/to/eventHelper.js)
+
 app.listen(port, "0.0.0.0", () => {
     console.log(`Auth Server listening at http://localhost:${port}`);
 });
@@ -22,7 +24,7 @@ app.post('/login', (req,res) => {
     let secret = req.body["password"];
     try{
         //check username if username exists in database, checks password
-        let info=dbSearch(username)
+        let info = eventHelper.sendEvent("Search", username)
         if (info.email!=username){
             throw new Error("Username doesn't exist")
         }
