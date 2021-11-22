@@ -67,7 +67,7 @@ export function SignUpForm() {
       <form className={classes.form} onSubmit={submiteHandler}>
       <div className={classes.control}>
           <label htmlFor="title">Email</label>
-          <input type="text" required value={username} onChange={(event)=>{setEmail(event.target.value)}}></input>
+          <input type="text" required value={email} onChange={(event)=>{setEmail(event.target.value)}}></input>
         </div>
         <div className={classes.control}>
           <label htmlFor="title">Username</label>
