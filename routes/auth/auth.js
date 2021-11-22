@@ -65,8 +65,8 @@ app.post('/signup/', (req,res) => { //post request bc we are adding to database
             password: secret,
             token: coin, 
             tokenTimer: 1800,
-            driver: req.body["driver"],
-            user: 0,
+            driver: false,
+            user: 01,
              } ).then(function(result) {})
         res.send({status: "Signup successful"});
         res.redirect('/getRide'); // redirects to join rides
