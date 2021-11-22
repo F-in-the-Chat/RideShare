@@ -7,7 +7,9 @@ app.use(express.json());
 
 //JS Object containing the events and addresses intrested in the events in the format {event:[address1,address2,...]}
 //Add default addresses here
-let event_subs = {"example":["http://localhost:5003/events"]};
+let event_subs = {"example":["http://localhost:5003/events"],
+  "test":["http://localhost:5000/events"]
+};
 
 app.listen(port, "0.0.0.0", () => {
   console.log(`Event Bus listening at http://localhost:${port}`);
@@ -25,7 +27,6 @@ app.listen(port, "0.0.0.0", () => {
 app.post("/events", (req, res) => {
   const event = req.body;
   event_subs[event.name].forEach((sub) => {
-    console.log(event)
     axios.post(sub, event).catch((err) => {
       console.log(err.message);
     });
@@ -41,7 +42,6 @@ app.post("/subscribe", (req, res) => {
       ? (event_subs[event] = [address])
       : event_subs[event].push(address);
   });
-  //console.log(event_subs);
   res.send({ status: "OK" });
 });
 

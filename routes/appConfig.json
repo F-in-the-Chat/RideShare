@@ -6,6 +6,7 @@
         "deleteRide":5006,
         "getRide":5005,
         "joinRide":5001,
-        "eventBus":5002
+        "eventBus":5002,
+        "database":5000
     }
 }
