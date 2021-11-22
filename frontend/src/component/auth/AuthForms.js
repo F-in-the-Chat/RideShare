@@ -26,7 +26,7 @@ export function SignInForm() {
     <Card>
       <form className={classes.form} onSubmit={submiteHandler}>
         <div className={classes.control}>
-          <label htmlFor="title">Username</label>
+          <label htmlFor="title">Email</label>
           <input type="text" required value={username} onChange={(event)=>{setUsername(event.target.value)}}></input>
         </div>
         <div className={classes.control}>
@@ -44,7 +44,6 @@ export function SignInForm() {
 
 export function SignUpForm() {
   // Retrieve data from in the input fields once
-  const [username,setUsername] = useState("")
   const [password,setPassword] = useState("")
   const [email,setEmail] = useState("")
 
@@ -52,7 +51,6 @@ export function SignUpForm() {
     // Prevents browser default
     event.preventDefault();
     let formData = {
-      user:username,
       password:password,
       email:email
     }
@@ -65,17 +63,13 @@ export function SignUpForm() {
   return (
     <Card>
       <form className={classes.form} onSubmit={submiteHandler}>
-      <div className={classes.control}>
-          <label htmlFor="title">Email</label>
-          <input type="text" required value={username} onChange={(event)=>{setEmail(event.target.value)}}></input>
+        <div className={classes.control}>
+            <label htmlFor="title">Email</label>
+            <input type="text" required value={email} onChange={(event)=>{setEmail(event.target.value)}}></input>
         </div>
         <div className={classes.control}>
-          <label htmlFor="title">Username</label>
-          <input type="text" required value={username} onChange={(event)=>{setUsername(event.target.value)}}></input>
-        </div>
-        <div className={classes.control}>
-          <label htmlFor="title">Password</label>
-          <input type="text" required value={password} onChange={(event)=>{setPassword(event.target.value)}}></input>
+            <label htmlFor="title">Password</label>
+            <input type="text" required value={password} onChange={(event)=>{setPassword(event.target.value)}}></input>
         </div>
         <div className={classes.actions}>
           <button>Sign Up</button>
