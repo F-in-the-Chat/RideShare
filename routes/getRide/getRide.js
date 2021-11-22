@@ -1,11 +1,13 @@
 const express = require("express");
 const axios = require("axios");
 const app = express();
-const config = require("../appConfig.json")
+const config = require("../appConfig.json");
 const port = config.ports.getRide;
 const Ride = require("../../models/ride.model");
+const cors = require("cors");
 
 app.use(express.json());
+app.use(cors());
 
 app.listen(port, "0.0.0.0", () => {
   console.log(`Get Ride Service listening at http://localhost:${port}`);
