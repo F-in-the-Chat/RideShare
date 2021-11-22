@@ -50,13 +50,13 @@ function createRide(event) {
         preferences: event.data.ride.preferences,
     });
     //Save Ride in the database
-    /*ride.save()
+    ride.save()
         .then((data) => {
             
         })
         .catch((err) => {
             console.log(err)
-        });*/
+        });
     return {"TEST":"DATA"}
 }
 
