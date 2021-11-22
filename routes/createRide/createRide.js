@@ -21,12 +21,12 @@ app.listen(port, "0.0.0.0", () => {
 });
 
 app.post("/createRide", (req, res) => {
-  console.log(req.body.content);
-  if (!req.body.content) {
-    return res.status(400).send({
-      message: "Ride content cannot be empty",
-    });
-  }
+  console.log(req.body);
+  // if (!req.body.content) {
+  //   return res.status(400).send({
+  //     message: "Ride content cannot be empty",
+  //   });
+  // }
 
   // Create Ride
   const ride = new Ride({
@@ -39,19 +39,17 @@ app.post("/createRide", (req, res) => {
     preferences: req.body.preferences,
   });
 
-  console.log(ride);
-
   // Save Ride in the database
-  ride
-    .save()
-    .then((data) => {
-      res.send(data);
-    })
-    .catch((err) => {
-      res.status(500).send({
-        message: err.message || "Some error occurred while creating the Ride.",
-      });
-    });
+  // ride
+  //   .save()
+  //   .then((data) => {
+  //     res.send(data);
+  //   })
+  //   .catch((err) => {
+  //     res.status(500).send({
+  //       message: err.message || "Some error occurred while creating the Ride.",
+  //     });
+  //   });
 });
 
 app.post("/events", (req, res) => {
