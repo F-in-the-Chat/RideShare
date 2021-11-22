@@ -1,7 +1,8 @@
 const express = require("express");
 const app = express();
 //const { MongoClient } = require("mongodb");
-const port = 5004;
+const config = require("../appConfig.json")
+const port = config.ports.auth;
 //var url = "mongodb+srv://testlogin.taf1q.mongodb.net/myFirstDatabase?authSource=%24external&authMechanism=MONGODB-X509&retryWrites=true&w=majority";
 //const client = new MongoClient(url);
 //await client.connect();

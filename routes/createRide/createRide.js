@@ -3,13 +3,14 @@ const express = require("express");
 const axios = require("axios");
 const app = express();
 const cors = require("cors");
-const port = 5003;
+const config = require("../appConfig.json")
+const port = config.ports.createRide;
 
 app.use(express.json());
 app.use(cors());
 
 app.listen(port, "0.0.0.0", () => {
-  console.log(`Example app listening at http://localhost:${port}`);
+  console.log(`Create Ride Service listening at http://localhost:${port}`);
   axios
     .post("http://localhost:5002/subscribe", {
       address: `http://localhost:${port}/events`,

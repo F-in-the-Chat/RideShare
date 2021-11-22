@@ -1,7 +1,8 @@
 const express = require("express");
 const app = express();
 const axios = require("axios");
-const port = 5002;
+const config = require("../routes/appConfig.json")
+const port = config.ports.eventBus;
 app.use(express.json());
 
 //JS Object containing the events and addresses intrested in the events in the format {event:[address1,address2,...]}

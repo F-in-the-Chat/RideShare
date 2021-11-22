@@ -1,0 +1,11 @@
+{
+    "ports":{
+        "auth":5004,
+        "cancelJoin":5007,
+        "createRide":5003,
+        "deleteRide":5006,
+        "getRide":5005,
+        "joinRide":5001,
+        "eventBus":5002
+    }
+}

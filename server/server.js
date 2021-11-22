@@ -1,14 +1,8 @@
-const express = require("express");
-const app = express();
-const port = 5000;
-
-// All the routes would be added here example:
-// const createRideRoute = require('../routes/createRide/createRide')
-
-app.listen(port, "0.0.0.0", () => {
-  console.log(`Example app listening at http://localhost:${port}`);
-});
-
-app.get("/", (req, res) => {
-  res.send({ Hello: "World" });
-});
+//require every js file that runs a microservice to start all microservices at once
+const eventBus = require("./eventbus")
+const auth = require("../routes/auth/auth")
+const create = require("../routes/createRide/createRide")
+const get = require("../routes/getRide/getRide")
+const cancel = require("../routes/cancelJoin/cancelJoin")
+const del = require("../routes/deleteRide/deleteRide")
+const join = require("../routes/joinRide/joinRide")
