@@ -1,12 +1,10 @@
 const express = require("express");
 const app = express();
-//const { MongoClient } = require("mongodb");
+const { MongoClient } = require("mongodb");
 const config = require("../appConfig.json")
 const port = config.ports.auth;
-//var url = "mongodb+srv://testlogin.taf1q.mongodb.net/myFirstDatabase?authSource=%24external&authMechanism=MONGODB-X509&retryWrites=true&w=majority";
-//const client = new MongoClient(url);
-//await client.connect();
-//client.connect();
+var url = "mongodb+srv://testlogin.taf1q.mongodb.net/myFirstDatabase?authSource=%24external&authMechanism=MONGODB-X509&retryWrites=true&w=majority";
+const client = new MongoClient(url);
 
 const jwt = require("jsonwebtoken");
 TOKEN_SECRET = "F1n7hEcH47"; //FInTheChat
@@ -23,8 +21,8 @@ app.post('/login', (req,res) => {
     let username = req.body["user"];
     let secret = req.body["password"];
     try{
-        //let info = db.inventory.find({email:username}) //id, email, password
         //check username if username exists in database, checks password
+        let info=dbSearch(username)
         if (info.email!=username){
             throw new Error("Username doesn't exist")
         }
@@ -38,8 +36,8 @@ app.post('/login', (req,res) => {
         // create token
         let coin = jwt.sign(username, process.env.TOKEN_SECRET, { expiresIn: '1800s' })
         db.collection('users').updateOne( { token: coin, tokenTimer: 1800 } ).then(function(result) {}) // I don't understand this then function thing but it was there
-        res.send("Login successful");
-        res.redirect('/getRide'); // redirects to join rides
+        console.log("Login successful");
+        //res.redirect('/getRide'); // redirects to join rides
     } catch (err){
         res.status().send(err);
     }
@@ -92,3 +90,18 @@ app.post('/logout', (req,res) => {
         res.status().send(err);
     }
 })
+
+app.post("/events", (req, res) => {
+    console.log(req.body);
+    res.send({ status: "OK" });
+  });
+
+async function dbSearch(user){
+    const db = await client.connect();
+    const query = {email:user}
+    let userInfo = (db.collection('logging').find(query))
+    //let info = db.inventory.find({email:username}) //id, email, password
+    client.close()
+    console.log(user)
+    return userInfo
+}
