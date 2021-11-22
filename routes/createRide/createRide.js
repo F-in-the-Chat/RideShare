@@ -22,11 +22,19 @@ app.listen(port, "0.0.0.0", () => {
 
 app.post("/createRide", (req, res) => {
   console.log(req.body);
+<<<<<<< HEAD
   // if (!req.body.content) {
   //   return res.status(400).send({
   //     message: "Ride content cannot be empty",
   //   });
   // }
+=======
+  /*if (!req.body.content) {
+    return res.status(400).send({
+      message: "Ride content cannot be empty",
+    });
+  }*/
+>>>>>>> 32170cfdb9615ea7abe85655d38f6fc81b5ad94e
 
   // Create Ride
   const ride = new Ride({
