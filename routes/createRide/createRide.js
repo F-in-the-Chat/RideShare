@@ -1,9 +1,9 @@
 const express = require("express");
-const eventHelper = require("../../server/eventHelper")
+const eventHelper = require("../../server/eventHelper");
 const axios = require("axios");
 const app = express();
 const cors = require("cors");
-const config = require("../appConfig.json")
+const config = require("../appConfig.json");
 const port = config.ports.createRide;
 
 app.use(express.json());
@@ -22,11 +22,14 @@ app.listen(port, "0.0.0.0", () => {
 });
 
 app.post("/createRide", (req, res) => {
-  eventHelper.sendEvent("createRide",req.body,(resp)=>{
-    //Callback code here
-  })
-})
-  
+  eventHelper.sendEvent(
+    "createRide",
+    req.body
+    // ,(resp)=>{
+    //   //Callback code here
+    // }
+  );
+});
 
 /*app.post("/events", (req, res) => {
   console.log(req.body);
