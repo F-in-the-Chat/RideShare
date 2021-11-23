@@ -41,14 +41,13 @@ function Rides() {
   const [loadedRides, setLoadedRides] = useState([]);
   useEffect(() => {
     setIsLoading(true);
-    axios
-      .get("http://localhost:5005/getRide")
-      // .then((res) => {
-      //   res.json();
-      // })
+    fetch("http://localhost:5005/getRide")
+      .then((res) => {
+        return res.json();
+      })
       .then((data) => {
         const rides = [];
-        console.log(typeof data);
+        console.log(data);
         for (const key in data) {
           const ride = {
             id: key,
