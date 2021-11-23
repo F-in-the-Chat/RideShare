@@ -3,6 +3,15 @@ import Card from "../ui/Card";
 import classes from "./RideItem.module.css";
 
 function SecondRideItem(props) {
+
+  const rideTitle = props.title;
+
+  function submitHandler() {
+    const rideToDelete = {rideTitle};
+    console.log(rideToDelete);
+    props.deleteRide(rideToDelete);
+  };
+
   return (
     <li className={classes.item}>
       <Card>
@@ -16,7 +25,7 @@ function SecondRideItem(props) {
           <p>{props.preferences}</p>
         </div>
         <div className={classes.actions}>
-          <button>Delete Ride</button>
+          <button onClick = {submitHandler}>Delete Ride</button>
         </div>
       </Card>
     </li>
