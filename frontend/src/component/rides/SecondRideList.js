@@ -16,6 +16,7 @@ function SecondRideList(props) {
           capacity={ride.capacity}
           price={ride.price}
           preferences={ride.preferences}
+          deleteRide={props.deleteRide}
         />
       ))}
     </ul>
