@@ -26,6 +26,7 @@ const eventHandlers = {
   Search: search,
   createUser: createUser,
   deleteToken: deleteToken,
+  deleteRide: deleteRide,
   getRide: getRide,
   "joinRide":joinRide,
 };
@@ -77,6 +78,18 @@ function createRide(event) {
       console.log(err);
     });
   return { TEST: "DATA" };
+}
+
+async function deleteRide(event) {
+    //let ride = await Ride
+    console.log("Inside deleteRide in db.js")
+    console.log(event)
+    let ride = await Ride.findOne({title: event.data.ride.rideTitle}).exec()
+    console.log(ride);
+    //TODO: MISSING MAIN LINE TO DELETE FROM COLLECTION
+
+    // db.collection("rides").deleteOne(ride);
+    // ride.save();
 }
 
 async function getRide(event) {
