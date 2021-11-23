@@ -9,10 +9,8 @@ const client = new MongoClient(url);
 
 const jwt = require("jsonwebtoken");
 TOKEN_SECRET = "F1n7hEcH47"; //FInTheChat
-const dotenv = require("dotenv");
+require("dotenv").config();
 
-dotenv.config();
-//process.env.TOKEN_SECRET;
 
 const eventHelper = require("../../server/eventHelper");
 
@@ -39,7 +37,7 @@ app.post("/login", (req, res) => {
     res.status(400).send(err);// invalid input
   }
     // create token
-    //let coin = jwt.sign(username, process.env.TOKEN_SECRET, {expiresIn: "1h",});
+    let coin = jwt.sign({email:"gg@gmail.com"}, "" + process.env.TOKEN_SECRET, {expiresIn: 1800}); // works now, first needs to be object, second to be made into string, and expireIn
     //db.collection("users").updateOne({ token: coin, tokenTimer: 1800 }).then(function (result) {}); // I don't understand this then function thing but it was there
     console.log("Login successful");
     //res.redirect('/getRide'); // redirects to join rides
@@ -59,20 +57,9 @@ app.post("/signup", (req, res) => {
   } catch (err) {
     res.status(400).send(err);
   }
-    let coin = jwt.sign(username, process.env.TOKEN_SECRET, {
+    let coin = jwt.sign(username, process.TOKEN_SECRET, {
       expiresIn: "1800s",
     });
-    db.collection("users")
-      .InsertOne({
-        email: username,
-        password: secret,
-        token: coin,
-        tokenTimer: 1800,
-        driver: false,
-        user: 01,
-      })
-      .then(function (result) {});
-
     let start = {
       email: username,
       password: secret,
@@ -87,7 +74,7 @@ app.post("/signup", (req, res) => {
 
 app.post("/logout", (req, res) => {
   let username = req.body["user"];
-  let coin = jwt.sign(username, process.env.TOKEN_SECRET, {
+  let coin = jwt.sign(username, process.TOKEN_SECRET, {
     expiresIn: "1h",
   });
   try {
