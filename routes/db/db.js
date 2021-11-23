@@ -17,20 +17,21 @@ const eventHandlers = {
   createUser: createUser,
   deleteToken: deleteToken,
   getRide: getRide,
+  "joinRide":joinRide,
 };
 
 app.listen(port, "0.0.0.0", () => {
-  console.log(`Database listening at http://localhost:${port}`);
+    console.log(`Database listening at http://localhost:${port}`);
 });
 
 app.post("/events", eventHandler);
 
 async function eventHandler(req, res) {
-  const event = req.body;
+    const event = req.body;
   let responseData = await main(event);
   responseData
     ? res.send({ status: "OK", response_data: responseData })
-    : res.send({ status: "Fuck You" });
+    : res.send({ status: "OK" });
 }
 
 async function main(event) {
@@ -49,16 +50,16 @@ function testEventHandler(event) {
 }
 
 function createRide(event) {
-  const ride = new Ride({
-    title: event.data.ride.title,
-    date: event.data.ride.date,
-    pickup: event.data.ride.pickup,
-    dropoff: event.data.ride.dropoff,
-    capacity: event.data.ride.capacity,
-    price: event.data.ride.price,
-    preferences: event.data.ride.preferences,
-  });
-  //Save Ride in the database
+    const ride = new Ride({
+        title: event.data.ride.title,
+        date: event.data.ride.date,
+        pickup: event.data.ride.pickup,
+        dropoff: event.data.ride.dropoff,
+        capacity: event.data.ride.capacity,
+        price: event.data.ride.price,
+        preferences: event.data.ride.preferences,
+    });
+    //Save Ride in the database
   ride
     .save()
     .then((data) => {})
@@ -67,21 +68,23 @@ function createRide(event) {
     });
   return { TEST: "DATA" };
 }
-
+            
 function getRide(event) {
   Ride.find()
     .then((rides) => {
       res.send(rides);
-    })
-    .catch((err) => {
+        })
+        .catch((err) => {
       res.status(500).send({
         message: err.message || "Something wrong while retrieving rides.",
-      });
+        });
     });
 }
 
-function joinRide(event) {
-  Ride.updateOne({ _id: event.ride }).then((ride) => {});
+async function joinRide(event) {
+  let ride = await Ride.findById(event.data.ride).exec()
+  ride.riders.push(event.data.user)
+  ride.save()
 }
 function search(event) {
   const query = { email: event.data };
