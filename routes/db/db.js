@@ -13,6 +13,9 @@ const User = require("../../models/user.model")
 const eventHandlers = {
     "test":testEventHandler,
     "createRide":createRide,
+    "Search":search,
+    "createUser":createUser,
+    "deleteToken":deleteToken,
 }
 
 app.listen(port, "0.0.0.0", () => {
@@ -85,5 +88,5 @@ function createUser(event){
 }
 
 function deleteToken(event){
-    
+    db.collection('logging').updateOne({ token: "", tokenTimer: 0 })
 }
