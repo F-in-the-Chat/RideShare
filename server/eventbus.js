@@ -14,7 +14,9 @@ let event_subs = {"example":["http://localhost:5003/events"],
   "createUser":["http://localhost:5000/events"],
   "deleteToken":["http://localhost:5000/events"],
   "joinRide":["http://localhost:5000/events"],
-  "getRide":["http://localhost:5000/events"]
+  "getRide":["http://localhost:5000/events"],
+  "deleteRide":["http://localhost:5000/events"],
+  "cancelJoin":["http://localhost:5000/events"],
 };
 
 app.listen(port, "0.0.0.0", () => {
