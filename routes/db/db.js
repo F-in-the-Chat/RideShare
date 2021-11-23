@@ -68,9 +68,9 @@ function createRide(event) {
     });
   return { TEST: "DATA" };
 }
-            
-function getRide(event) {
-  Ride.find()
+
+async function getRide(event) {
+  await Ride.find()
     .then((rides) => {
       res.send(rides);
         })
