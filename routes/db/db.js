@@ -126,9 +126,10 @@ function createUser(event) {
     driver: start.driver,
     user: start.user,
   };
-  db.collection("users").InsertOne(user);
+  Logs.InsertOne(user);
 }
 
 function deleteToken(event) {
-  db.collection("logging").updateOne({ token: "", tokenTimer: 0 });
+  const query = {email:event.data}
+  Logs.findOne(query).updateOne({ token: "", tokenTimer: 0 });
 }
