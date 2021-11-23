@@ -9,15 +9,6 @@ app.use(express.json());
 const Ride = require("../../models/ride.model");
 const User = require("../../models/user.model");
 
-const schema = new mongoose.Schema({
-    email:'string', 
-    password:'string', 
-    token: 'string', 
-    tokenTimer: 'Number',
-    driver: false, 
-    user: 'Number'
-});
-const Logs = mongoose.model('logging',schema)
 
 //Define Event Handlers here in the form "event name": handlerFunction
 const eventHandlers = {
@@ -111,8 +102,18 @@ async function cancelJoin(event) {
 }
 
 function search(event){
+    let schema = new mongoose.Schema({
+      email:'string', 
+      password:'string', 
+      token: 'string', 
+      tokenTimer: 'Number',
+      driver: false, 
+      user: 'Number'
+    });
+    let Logs = mongoose.model('logging',schema)
     const query = {email:event.data}
-    let userInfo = (Logs.findOne(query))
+    let userInfo = (Logs.find(query))
+    console.log(userInfo)
     return userInfo
 }
 
@@ -126,6 +127,7 @@ function createUser(event) {
     driver: start.driver,
     user: start.user,
   };
+  console.log(user);
   Logs.InsertOne(user);
 }
 

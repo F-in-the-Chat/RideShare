@@ -33,6 +33,7 @@ app.post("/login", (req, res) => {
       throw new Error("Password doesn't match");
     }
   } catch (err) {
+    console.log(err)
     res.status(400).send(err);// invalid input
   }
     // create token
