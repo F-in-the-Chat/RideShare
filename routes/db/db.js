@@ -28,7 +28,8 @@ const eventHandlers = {
   deleteToken: deleteToken,
   deleteRide: deleteRide,
   getRide: getRide,
-  "joinRide":joinRide,
+  "joinRide": joinRide,
+  cancelJoin: cancelJoin,
 };
 
 app.listen(port, "0.0.0.0", () => {
