@@ -57,26 +57,22 @@ app.post("/signup", (req, res) => {
   } catch (err) {
     res.status(400).send(err);
   }
-    let coin = jwt.sign(username, process.TOKEN_SECRET, {
-      expiresIn: "1800s",
-    });
-    let start = {
-      email: username,
+  let coin = jwt.sign({email:"gg@gmail.com"}, "" + process.env.TOKEN_SECRET, {expiresIn: 1800});
+  let start = {
+    email: username,
       password: secret,
       token: coin,
       tokenTimer: 1800,
       driver: false,
       user: 01,
     };
-    eventHelper.sendEvent("createUser", start);
-    console.log("Signup successful");
+  eventHelper.sendEvent("createUser", start);
+  console.log("Signup successful");
 });
 
 app.post("/logout", (req, res) => {
   let username = req.body["user"];
-  let coin = jwt.sign(username, process.TOKEN_SECRET, {
-    expiresIn: "1h",
-  });
+  let coin = jwt.sign({email:"gg@gmail.com"}, "" + process.env.TOKEN_SECRET, {expiresIn: 1800});
   try {
     let info = eventHelper.sendEvent("Search", username);
     if (coin != info.token) {
