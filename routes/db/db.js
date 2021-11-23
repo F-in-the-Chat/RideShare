@@ -101,18 +101,8 @@ async function cancelJoin(event) {
     ride.save()
 }
 
-function search(event){
-    let schema = new mongoose.Schema({
-      email:'string', 
-      password:'string', 
-      token: 'string', 
-      tokenTimer: 'Number',
-      driver: false, 
-      user: 'Number'
-    });
-    let Logs = mongoose.model('logging',schema)
-    let query = {email:event.data}
-    let userInfo = Logs.find(query).exec();
+async function search(event){
+    let userInfo = await User.findById(event.data).exec();
     console.log(userInfo)
     return userInfo
 }

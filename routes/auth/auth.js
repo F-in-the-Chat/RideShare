@@ -19,13 +19,13 @@ app.listen(port, "0.0.0.0", () => {
 });
 
 app.post("/login", (req, res) => {
-  let username = req.query["email"];
-  let secret = req.query["password"];
-  console.log(req);
+  let username = "gg@gmail.com";//req.body["email"];
+  let secret = "getRekted";//req.body["password"];
+  console.log(username);
   try {
     //check username if username exists in database, checks password
-    console.log(username)
     let info = eventHelper.sendEvent("Search", username);
+    console.log(info)
     if (info.email != username) {
       throw new Error("Username doesn't exist");
     }
