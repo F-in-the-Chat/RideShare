@@ -104,6 +104,12 @@ async function joinRide(event) {
   ride.save()
 }
 
+async function cancelJoin(event) {
+    let ride = await Ride.findById(event.data.ride).exec()
+    ride.riders.pop(event.data.user)
+    ride.save()
+}
+
 function search(event){
     const query = {email:event.data}
     let userInfo = (Logs.findOne(query))
