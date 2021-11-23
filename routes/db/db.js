@@ -102,7 +102,10 @@ async function cancelJoin(event) {
 }
 
 async function search(event){
-    let userInfo = await User.findById(event.data).exec();
+    let userInfo = await User.findOne({email:event.data}, function (err,myUser){
+      if(!err) console.log("step2");
+      else console.log(err.message);
+    });
     console.log(userInfo)
     return userInfo
 }

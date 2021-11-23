@@ -4,26 +4,27 @@ const UserSchema = mongoose.Schema({
   email: {
     type: String,
     required: true,
+    unique: true
   },
   password:{
       type: String,
-      required: true,
+      required: true
   },
   token:{
       type: String,
-      required: true,
+      required: true
   },
   tokenTimer:{
       type: Number,
-      required: false,
+      required: false
   },
   driver:{
       type: Boolean,
-      required: true,
+      default: false
   },
   userId:{
       type: Number,
-      required: true,
+      required: true
   }
 });
 module.exports = mongoose.model("User", UserSchema);
