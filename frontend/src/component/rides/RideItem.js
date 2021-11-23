@@ -16,7 +16,7 @@ function RideItem(props) {
           <p>{props.preferences}</p>
         </div>
         <div className={classes.actions}>
-          <button>Book Ride</button>
+          <button>Join Ride</button>
         </div>
       </Card>
     </li>
