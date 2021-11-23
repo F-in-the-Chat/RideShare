@@ -65,3 +65,25 @@ function joinRide(event){
 
     })
 }
+function search(event){
+    const query = {email:event.data}
+    let userInfo = (db.collection('logging').find(query))
+    return userInfo
+}
+
+function createUser(event){
+    let start = event.data.start;
+    const user = {
+        email:start.email, 
+        password:start.password, 
+        token: start.token, 
+        tokenTimer: start.tokenTimer,
+        driver: start.driver, 
+        user: start.user
+    }
+    db.collection('users').InsertOne(user);
+}
+
+function deleteToken(event){
+    
+}
