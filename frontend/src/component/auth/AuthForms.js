@@ -6,14 +6,14 @@ import axios from "axios";
 
 export function SignInForm() {
   // Retrieve data from in the input fields once
-  const [username,setUsername] = useState("")
+  const [email,setEmail] = useState("")
   const [password,setPassword] = useState("")
 
   const submiteHandler = (event) => {
     // Prevents browser default
     event.preventDefault();
     let formData = {
-      email:username,
+      email:email,
       password:password
     }
     //Submit Form data through axios request to server endpoint
@@ -27,7 +27,7 @@ export function SignInForm() {
       <form className={classes.form} onSubmit={submiteHandler}>
         <div className={classes.control}>
           <label htmlFor="title">Email</label>
-          <input type="text" required value={email} onChange={(event)=>{setUsername(event.target.value)}}></input>
+          <input type="text" required value={email} onChange={(event)=>{setEmail(event.target.value)}}></input>
         </div>
         <div className={classes.control}>
           <label htmlFor="title">Password</label>

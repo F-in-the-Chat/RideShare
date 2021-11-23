@@ -5,6 +5,7 @@ const config = require("../appConfig.json");
 const port = config.ports.getRide;
 const Ride = require("../../models/ride.model");
 const cors = require("cors");
+const eventHelper = require("../../server/eventHelper")
 
 app.use(express.json());
 app.use(cors());
@@ -22,15 +23,9 @@ app.listen(port, "0.0.0.0", () => {
 });
 
 app.get("/getRide", (req, res) => {
-  Ride.find()
-    .then((rides) => {
-      res.send(rides);
-    })
-    .catch((err) => {
-      res.status(500).send({
-        message: err.message || "Something wrong while retrieving rides.",
-      });
-    });
+  eventHelper.sendEvent("getRide",req.body,(response)=>{
+    res.send(response.data.response_data)
+  })
 });
 
 app.post("/events", (req, res) => {

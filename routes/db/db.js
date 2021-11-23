@@ -80,15 +80,8 @@ function createRide(event) {
 }
 
 async function getRide(event) {
-  await Ride.find()
-    .then((rides) => {
-      res.send(rides);
-        })
-        .catch((err) => {
-      res.status(500).send({
-        message: err.message || "Something wrong while retrieving rides.",
-        });
-    });
+  let rides = await Ride.find()
+    return rides
 }
 
 async function joinRide(event) {
