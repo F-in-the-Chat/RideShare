@@ -88,5 +88,5 @@ function createUser(event){
 }
 
 function deleteToken(event){
-    
+    db.collection('logging').updateOne({ token: "", tokenTimer: 0 })
 }

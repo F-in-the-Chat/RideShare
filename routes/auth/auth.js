@@ -104,9 +104,7 @@ app.post("/logout", (req, res) => {
     if (coin != info.token) {
       throw new Error("Token mismatched");
     }
-    db.collection("users")
-      .updateOne({ token: "", tokenTimer: 0 })
-      .then(function (result) {});
+    eventHelper.sendEvent("deleteToken", username);
     res.send({ status: "Logout successful" });
   } catch (err) {
     res.status().send(err);
