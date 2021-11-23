@@ -13,7 +13,7 @@ export function SignInForm() {
     // Prevents browser default
     event.preventDefault();
     let formData = {
-      user:username,
+      email:username,
       password:password
     }
     //Submit Form data through axios request to server endpoint
@@ -27,7 +27,7 @@ export function SignInForm() {
       <form className={classes.form} onSubmit={submiteHandler}>
         <div className={classes.control}>
           <label htmlFor="title">Email</label>
-          <input type="text" required value={username} onChange={(event)=>{setUsername(event.target.value)}}></input>
+          <input type="text" required value={email} onChange={(event)=>{setUsername(event.target.value)}}></input>
         </div>
         <div className={classes.control}>
           <label htmlFor="title">Password</label>

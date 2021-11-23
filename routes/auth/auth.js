@@ -12,7 +12,7 @@ TOKEN_SECRET = "F1n7hEcH47"; //FInTheChat
 const dotenv = require("dotenv");
 
 dotenv.config();
-process.env.TOKEN_SECRET;
+//process.env.TOKEN_SECRET;
 
 const eventHelper = require("../../server/eventHelper");
 
@@ -21,8 +21,8 @@ app.listen(port, "0.0.0.0", () => {
 });
 
 app.post("/login", (req, res) => {
-  let username = req.body["user"];
-  let secret = req.body["password"];
+  let username = req.query["email"];
+  let secret = req.query["password"];
   try {
     //check username if username exists in database, checks password
     let info = eventHelper.sendEvent("Search", username);
@@ -33,21 +33,13 @@ app.post("/login", (req, res) => {
       throw new Error("Password doesn't match");
     }
   } catch (err) {
-    res.status().send(err);
+    res.status(400).send(err);// invalid input
   }
-  try {
     // create token
-    let coin = jwt.sign(username, process.env.TOKEN_SECRET, {
-      expiresIn: "1800s",
-    });
-    db.collection("users")
-      .updateOne({ token: coin, tokenTimer: 1800 })
-      .then(function (result) {}); // I don't understand this then function thing but it was there
+    //let coin = jwt.sign(username, process.env.TOKEN_SECRET, {expiresIn: "1h",});
+    //db.collection("users").updateOne({ token: coin, tokenTimer: 1800 }).then(function (result) {}); // I don't understand this then function thing but it was there
     console.log("Login successful");
     //res.redirect('/getRide'); // redirects to join rides
-  } catch (err) {
-    res.status().send(err);
-  }
 });
 
 app.post("/signup", (req, res) => {
@@ -62,9 +54,8 @@ app.post("/signup", (req, res) => {
       throw new Error("Username exists");
     }
   } catch (err) {
-    res.status().send(err);
+    res.status(400).send(err);
   }
-  try {
     let coin = jwt.sign(username, process.env.TOKEN_SECRET, {
       expiresIn: "1800s",
     });
@@ -89,15 +80,12 @@ app.post("/signup", (req, res) => {
     };
     eventHelper.sendEvent("createUser", start);
     console.log("Signup successful");
-  } catch (err) {
-    res.status().send(err);
-  }
 });
 
 app.post("/logout", (req, res) => {
   let username = req.body["user"];
   let coin = jwt.sign(username, process.env.TOKEN_SECRET, {
-    expiresIn: "1800s",
+    expiresIn: "1h",
   });
   try {
     let info = eventHelper.sendEvent("Search", username);
@@ -107,7 +95,7 @@ app.post("/logout", (req, res) => {
     eventHelper.sendEvent("deleteToken", username);
     res.send({ status: "Logout successful" });
   } catch (err) {
-    res.status().send(err);
+    res.status(424).send(err);
   }
 });
 
