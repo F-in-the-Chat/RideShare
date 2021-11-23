@@ -111,8 +111,8 @@ function search(event){
       user: 'Number'
     });
     let Logs = mongoose.model('logging',schema)
-    const query = {email:event.data}
-    let userInfo = (Logs.find(query))
+    let query = {email:event.data}
+    let userInfo = Logs.find(query).exec();
     console.log(userInfo)
     return userInfo
 }
