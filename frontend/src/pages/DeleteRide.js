@@ -40,7 +40,7 @@ function DeleteRide() {
   }
 
   function deleteRideHandler(ride) {
-    console.log("Ride in deleteRideHandler: " + ride.rideTitle)
+    // deleting ride using title name only
     axios
       .post("http://localhost:5006/deleteRide", { ride})
       .catch((err) => {
