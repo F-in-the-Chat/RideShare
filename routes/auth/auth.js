@@ -37,33 +37,31 @@ async (req, res) => {
   const {email, password} = req.body; 
   try {
     //let info = eventHelper.sendEvent("Search", username);
-    console.log(email)
     let user = await User.findOne({ email });
     if (user) {
-      throw new Error("Username exists");
+      res.status(400).json({ errors: [{msg: "User already exists"}]})
     }
+    user = new User({
+      email,
+      password,
+    });
+
+    const salt = await bcrypt.genSalt(10);
+
+    start.password = await bcrypt.hash(password, salt);
+
+    await start.save();
+
     const payload = {
-      start: {
-        id: start.id,
+      user: {
+        id: user.id,
       }
     }
     jwt.sign(payload, jwtSecret, {expiresIn: 360000}, (err,token) => {
       if (err) throw err;
       res.json({ token });
     });
-    let start = new User({
-      email: email,
-      password: password,
-      token: coin,
-      tokenTimer: 1800,
-      driver: false,
-      user: 01,
-    });
-    const salt = await bcrypt.genSalt(10);
 
-    start.password = await bcrypt.hash(password, salt);
-
-    await start.save();
     //eventHelper.sendEvent("createUser", start);
     console.log("Signup successful");
 
