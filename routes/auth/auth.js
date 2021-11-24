@@ -15,7 +15,7 @@ const jwt = require("jsonwebtoken");
 const {check, validationResult } = require("express-validator");
 
 var jwtSecret = "F1n7hEcH47"; //FInTheChat
-require("dotenv").config();
+//require("dotenv").config();
 
 
 const eventHelper = require("../../server/eventHelper");
@@ -25,6 +25,9 @@ app.listen(port, "0.0.0.0", () => {
   console.log(`Auth Server listening at http://localhost:${port}`);
 });
 
+
+//@route POST /signup
+//@access Public
 router.post("/signup", [
   check("email", "Please provide valid email").isEmail(),
   check("password", "Please Enter a password").isLength({ min: 1}),
