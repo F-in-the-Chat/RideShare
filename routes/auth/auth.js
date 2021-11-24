@@ -19,7 +19,7 @@ require("dotenv").config();
 
 
 const eventHelper = require("../../server/eventHelper");
-const { Router } = require("express");
+//const { Router } = require("express");
 
 app.listen(port, "0.0.0.0", () => {
   console.log(`Auth Server listening at http://localhost:${port}`);
@@ -36,9 +36,10 @@ async (req, res) => {
   }
   const {email, password} = req.body; 
   try {
-    let info = eventHelper.sendEvent("Search", username);
-    //let test = db.users.find({email:username})
-    if (info) {
+    //let info = eventHelper.sendEvent("Search", username);
+    console.log(email)
+    let user = await User.findOne({ email });
+    if (user) {
       throw new Error("Username exists");
     }
     const payload = {
@@ -93,6 +94,34 @@ async (req, res) => {
     return res.status(400).json({errors:errors.array() })
   }
   const {email, password} = req.body;
+  try {
+    let info = eventHelper.sendEvent("Search", username);
+    // let user = await User.findOne({ email });
+    if (!info) {
+      return res.status(400)
+      .json({errors: [{ msg: "Invalid Credentials"}]});
+    }
+
+    const isMatch = await bcrypt.compare(password, start.password);
+
+    if(!isMatch){
+      return res.status(400)
+      .json({errors: [{ msg: "Invalid Credentials"}]});
+    }
+
+    const payload = {
+      start: {
+        id: start.id,
+      }
+    }
+    jwt.sign(payload, jwtSecret, {expiresIn: "5 days"}, (err,token) => {
+      if (err) throw err;
+      res.json({ token });
+    });
+  } catch {
+    console.error(err.message);
+    res.status(500).send("Internal Server Error")
+  }
 });
 
 
