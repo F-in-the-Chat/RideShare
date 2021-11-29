@@ -125,7 +125,7 @@ async function search(event) {
 // }
 
 async function logging(event){
-  let info = await User.findById(event.data.email).exec();
+  let info = await User.findOne(event.data.email).exec();
   console.log(info)
   if (!info){
     throw new Error("User doesn't exist");
