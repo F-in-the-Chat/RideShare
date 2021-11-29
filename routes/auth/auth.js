@@ -163,16 +163,8 @@ app.listen(port, "0.0.0.0", () => {
 });
 
 app.post("/signup", (req, res) => {
-  // eventHelper.sendEvent("createUser", req.body);
   try {
-    // const user = new User({
-    //   email: req.body.email,
-    //   password: req.body.password,
-    //   driver: req.body.driver,
-    // });
-    // const createdUser = user.save();
     eventHelper.sendEvent("createUser", req.body);
-    // console.log(createdUser);
     res.status(200).send("User signed up successfully.");
   } catch (err) {
     res.status(400).send(err);
