@@ -9,7 +9,6 @@ app.use(express.json());
 const Ride = require("../../models/ride.model");
 const User = require("../../models/user.model");
 
-
 //Define Event Handlers here in the form "event name": handlerFunction
 const eventHandlers = {
   test: testEventHandler,
@@ -19,18 +18,18 @@ const eventHandlers = {
   deleteToken: deleteToken,
   deleteRide: deleteRide,
   getRide: getRide,
-  "joinRide": joinRide,
+  joinRide: joinRide,
   cancelJoin: cancelJoin,
 };
 
 app.listen(port, "0.0.0.0", () => {
-    console.log(`Database listening at http://localhost:${port}`);
+  console.log(`Database listening at http://localhost:${port}`);
 });
 
 app.post("/events", eventHandler);
 
 async function eventHandler(req, res) {
-    const event = req.body;
+  const event = req.body;
   let responseData = await main(event);
   responseData
     ? res.send({ status: "OK", response_data: responseData })
@@ -53,16 +52,16 @@ function testEventHandler(event) {
 }
 
 function createRide(event) {
-    const ride = new Ride({
-        title: event.data.ride.title,
-        date: event.data.ride.date,
-        pickup: event.data.ride.pickup,
-        dropoff: event.data.ride.dropoff,
-        capacity: event.data.ride.capacity,
-        price: event.data.ride.price,
-        preferences: event.data.ride.preferences,
-    });
-    //Save Ride in the database
+  const ride = new Ride({
+    title: event.data.ride.title,
+    date: event.data.ride.date,
+    pickup: event.data.ride.pickup,
+    dropoff: event.data.ride.dropoff,
+    capacity: event.data.ride.capacity,
+    price: event.data.ride.price,
+    preferences: event.data.ride.preferences,
+  });
+  //Save Ride in the database
   ride
     .save()
     .then((data) => {})
@@ -73,58 +72,79 @@ function createRide(event) {
 }
 
 async function deleteRide(event) {
-    //let ride = await Ride
-    console.log("Inside deleteRide in db.js")
-    console.log(event)
-    let ride = await Ride.findOne({title: event.data.ride.rideTitle}).exec()
-    console.log(ride);
-    //TODO: MISSING MAIN LINE TO DELETE FROM COLLECTION
+  //let ride = await Ride
+  console.log("Inside deleteRide in db.js");
+  console.log(event);
+  let ride = await Ride.findOne({ title: event.data.ride.rideTitle }).exec();
+  console.log(ride);
+  //TODO: MISSING MAIN LINE TO DELETE FROM COLLECTION
 
-    // db.collection("rides").deleteOne(ride);
-    // ride.save();
+  // db.collection("rides").deleteOne(ride);
+  // ride.save();
 }
 
 async function getRide(event) {
-  let rides = await Ride.find()
-    return rides
+  let rides = await Ride.find();
+  return rides;
 }
 
 async function joinRide(event) {
-  let ride = await Ride.findById(event.data.ride).exec()
-  ride.riders.push(event.data.user)
-  ride.save()
+  let ride = await Ride.findById(event.data.ride).exec();
+  ride.riders.push(event.data.user);
+  ride.save();
 }
 
 async function cancelJoin(event) {
-    let ride = await Ride.findById(event.data.ride).exec()
-    ride.riders.pop(event.data.user)
-    ride.save()
+  let ride = await Ride.findById(event.data.ride).exec();
+  ride.riders.pop(event.data.user);
+  ride.save();
 }
 
-async function search(event){
-    let userInfo = await User.findOne({email:event.data}, function (err,myUser){
-      if(!err) console.log("step2");
+async function search(event) {
+  let userInfo = await User.findOne(
+    { email: event.data },
+    function (err, myUser) {
+      if (!err) console.log("step2");
       else console.log(err.message);
-    });
-    console.log(userInfo)
-    return userInfo
+    }
+  );
+  console.log(userInfo);
+  return userInfo;
 }
+
+// function createUser(event) {
+//   let start = event.data.start;
+//   const user = {
+//     email: start.email,
+//     password: start.password,
+//     token: start.token,
+//     tokenTimer: start.tokenTimer,
+//     driver: start.driver,
+//     user: start.user,
+//   };
+//   console.log(user);
+//   Logs.InsertOne(user);
+// }
 
 function createUser(event) {
-  let start = event.data.start;
-  const user = {
-    email: start.email,
-    password: start.password,
-    token: start.token,
-    tokenTimer: start.tokenTimer,
-    driver: start.driver,
-    user: start.user,
-  };
-  console.log(user);
-  Logs.InsertOne(user);
+  console.log(event.data.email);
+
+  const user = new User({
+    email: event.data.email,
+    password: event.data.password,
+    driver: event.data.driver,
+  });
+
+  user
+    .save()
+    .then((data) => {})
+    .catch((err) => {
+      console.log(err);
+    });
+  return { TEST: "DATA" };
 }
 
 function deleteToken(event) {
-  const query = {email:event.data}
+  const query = { email: event.data };
   Logs.findOne(query).updateOne({ token: "", tokenTimer: 0 });
 }
