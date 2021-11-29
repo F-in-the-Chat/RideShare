@@ -10,7 +10,7 @@ app.use(express.json());
 let event_subs = {"example":["http://localhost:5003/events"],
   "test":["http://localhost:5000/events"],
   "createRide":["http://localhost:5000/events"],
-  "Search":["http://localhost:5000/events"],
+  "logging":["http://localhost:5000/events"],
   "createUser":["http://localhost:5000/events"],
   "deleteToken":["http://localhost:5000/events"],
   "joinRide":["http://localhost:5000/events"],
