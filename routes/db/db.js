@@ -4,6 +4,7 @@ const app = express();
 const axios = require("axios");
 const config = require("../appConfig.json");
 const port = config.ports.database;
+const bcrypt = require("bcrypt");
 app.use(express.json());
 
 const Ride = require("../../models/ride.model");
@@ -125,17 +126,33 @@ async function search(event) {
 // }
 
 async function logging(event){
-  let info = await User.findOne(event.data.email).exec();
-  console.log(info)
+  let info;
+  let validPassword;
+  try {
+    info = await User.findOne({email: event.data.email}).exec();
+  } catch (e) {
+    console.log(e)
+  }
+  
+  // email does not exist
   if (!info){
     throw new Error("User doesn't exist");
   }
-  if (info.password != event.data.password) {
+  
+  try {
+    validPassword = await bcrypt.compare(event.data.password, info.password);
+  } catch (e) {
+    console.log(e)
+  }
+  
+  // invalid password
+  if (!validPassword) {
     throw new Error("Password doesn't match");
   }
-  let coin = generateToken(); // check here
-  info.token.push(coin); // check here
-  info.save();
+
+  // let coin = generateToken(); // check here
+  // info.token.push(coin); // check here
+  // info.save();
 }
 
 function createUser(event) {
