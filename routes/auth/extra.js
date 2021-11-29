@@ -52,12 +52,6 @@ function deleteToken(event){
       //check username if username exists in database, checks password
       let info = eventHelper.sendEvent("Search", username);
       console.log(info)
-      if (info.email != username) {
-        throw new Error("Username doesn't exist");
-      }
-      if (info.password != secret) {
-        throw new Error("Password doesn't match");
-      }
     } catch (err) {
       console.log(err)
       res.status(400).send(err);// invalid input
