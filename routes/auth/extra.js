@@ -50,8 +50,8 @@ function deleteToken(event){
     //console.log(req.body);
     try {
       //check username if username exists in database, checks password
-      let info = eventHelper.sendEvent("Search", username);
-      console.log(info)
+      eventHelper.sendEvent("Search", username);
+      //console.log(info)
     } catch (err) {
       console.log(err)
       res.status(400).send(err);// invalid input
@@ -71,6 +71,9 @@ function deleteToken(event){
     if (info.password != event.data.password) {
       throw new Error("Password doesn't match");
     }
+    let coin = generateToken();
+    info.token.push(coin);
+    info.save();
   }
 
 
