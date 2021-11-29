@@ -85,46 +85,30 @@ app.get("/auth", async (req, res) => {
   }
 })
 
-router.post("/login", [
-  check("email", "Please provide valid email").isEmail(),
-  check("password", "Password is required").exists(),
-],
-async (req, res) => {
-  const errors = validationResult(req);
-  if(!errors.isEmpty()){
-    return res.status(400).json({errors:errors.array() })
-  }
-  const {email, password} = req.body;
-  try {
-    let info = eventHelper.sendEvent("Search", username);
-    // let user = await User.findOne({ email });
-    if (!info) {
-      return res.status(400)
-      .json({errors: [{ msg: "Invalid Credentials"}]});
-    }
-
-    const isMatch = await bcrypt.compare(password, start.password);
-
-    if(!isMatch){
-      return res.status(400)
-      .json({errors: [{ msg: "Invalid Credentials"}]});
-    }
-
-    const payload = {
-      start: {
-        id: start.id,
+app.post("/login", (req, res) => {
+    let username = "gg@gmail.com";//req.body["email"];
+    let secret = "getRekted";//req.body["password"];
+    console.log(req.body);
+    try {
+      //check username if username exists in database, checks password
+      let info = eventHelper.sendEvent("Search", username);
+      console.log(info)
+      if (info.email != username) {
+        throw new Error("Username doesn't exist");
       }
+      if (info.password != secret) {
+        throw new Error("Password doesn't match");
+      }
+    } catch (err) {
+      console.log(err)
+      res.status(400).send(err);// invalid input
     }
-    jwt.sign(payload, jwtSecret, {expiresIn: "5 days"}, (err,token) => {
-      if (err) throw err;
-      res.json({ token });
-    });
-  } catch {
-    console.error(err.message);
-    res.status(500).send("Internal Server Error")
-  }
-});
-
+      // create token
+      //let coin = jwt.sign({email:"gg@gmail.com"}, "" + process.env.TOKEN_SECRET, {expiresIn: 1800}); // works now, first needs to be object, second to be made into string, and expireIn
+      //db.collection("users").updateOne({ token: coin, tokenTimer: 1800 }).then(function (result) {}); // I don't understand this then function thing but it was there
+      console.log("Login successful");
+      //res.redirect('/getRide'); // redirects to join rides
+  });
 
 app.post("/logout", (req, res) => {
   let username = req.body["user"];
