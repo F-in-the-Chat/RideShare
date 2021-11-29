@@ -150,7 +150,7 @@ async function logging(event){
     throw new Error("Password doesn't match");
   }
 
-  // let coin = generateToken(); // check here
+  let coin = info.methods.generateToken(); // check here
   // info.token.push(coin); // check here
   // info.save();
 }
