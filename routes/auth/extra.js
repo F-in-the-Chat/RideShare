@@ -44,10 +44,10 @@ function deleteToken(event){
     return userInfo
 } */
 
-/* app.post("/login", (req, res) => {
-    let username = "gg@gmail.com";//req.body["email"];
-    let secret = "getRekted";//req.body["password"];
-    console.log(req.body);
+  app.post("/login", (req, res) => {
+    //let username = "gg@gmail.com";//req.body["email"];
+    //let secret = "getRekted";//req.body["password"];
+    //console.log(req.body);
     try {
       //check username if username exists in database, checks password
       let info = eventHelper.sendEvent("Search", username);
@@ -65,11 +65,22 @@ function deleteToken(event){
       // create token
       //let coin = jwt.sign({email:"gg@gmail.com"}, "" + process.env.TOKEN_SECRET, {expiresIn: 1800}); // works now, first needs to be object, second to be made into string, and expireIn
       //db.collection("users").updateOne({ token: coin, tokenTimer: 1800 }).then(function (result) {}); // I don't understand this then function thing but it was there
-      console.log("Login successful");
+      res.status(200).send("Login successful");
       //res.redirect('/getRide'); // redirects to join rides
-  }); */
+  }); 
 
-  router.post("/login", [
+  async function logging(event){
+    let info = await User.findById(event.data.email).exec();
+    if (info.email != event.data.email) {
+      throw new Error("Username doesn't exist");
+    }
+    if (info.password != event.data.password) {
+      throw new Error("Password doesn't match");
+    }
+  }
+
+
+/*  router.post("/login", [
     check("email", "Please provide valid email").isEmail(),
     check("password", "Password is required").exists(),
   ],
@@ -107,4 +118,4 @@ function deleteToken(event){
       console.error(err.message);
       res.status(500).send("Internal Server Error")
     }
-  });
+  }); */
