@@ -126,8 +126,9 @@ async function search(event) {
 
 async function logging(event){
   let info = await User.findById(event.data.email).exec();
-  if (info.email != event.data.email) {
-    throw new Error("Username doesn't exist");
+  console.log(info)
+  if (!info){
+    throw new Error("User doesn't exist");
   }
   if (info.password != event.data.password) {
     throw new Error("Password doesn't match");
