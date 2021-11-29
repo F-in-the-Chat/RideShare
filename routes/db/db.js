@@ -13,7 +13,7 @@ const User = require("../../models/user.model");
 const eventHandlers = {
   test: testEventHandler,
   createRide: createRide,
-  Search: search,
+  logging: logging,
   createUser: createUser,
   deleteToken: deleteToken,
   deleteRide: deleteRide,
@@ -123,6 +123,19 @@ async function search(event) {
 //   console.log(user);
 //   Logs.InsertOne(user);
 // }
+
+async function logging(event){
+  let info = await User.findById(event.data.email).exec();
+  if (info.email != event.data.email) {
+    throw new Error("Username doesn't exist");
+  }
+  if (info.password != event.data.password) {
+    throw new Error("Password doesn't match");
+  }
+  let coin = generateToken(); // check here
+  info.token.push(coin); // check here
+  info.save();
+}
 
 function createUser(event) {
   console.log(event.data.email);
