@@ -39,6 +39,7 @@ app.listen(port, "0.0.0.0", () => {
 // });
 
 app.post("/deleteRide", (req, res) => {
+  console.log("inside /deleteRide in deleteRide.js")
   eventHelper.sendEvent(
     "deleteRide",
     req.body
