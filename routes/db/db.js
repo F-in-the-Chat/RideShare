@@ -95,7 +95,6 @@ async function joinRide(event) {
 
    let ride = await Ride.findById(event.data.ride).exec();
    let user = await User.findOne({token:event.data.user}).exec()
-   //console.log(user)
    if(!ride.riders.includes(user._id)){
     ride.riders.push(user._id);
     ride.save();
@@ -104,11 +103,10 @@ async function joinRide(event) {
 
 // cancelJoin - requires rideId and tokenId - tokenId will be converted to userId
 async function cancelJoin(event) {
-  console.log("Inside cancelJoin in db.js")
-  console.log(event)
 
   let ride = await Ride.findById(event.data.ride).exec();
-  ride.riders = ride.riders.filter((rider)=>{rider!=event.data.user});
+  let user = await User.findOne({token:event.data.user}).exec()
+  ride.riders = ride.riders.filter((rider)=>{rider!=user._id});
   ride.save();
 }
 

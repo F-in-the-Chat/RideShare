@@ -9,8 +9,9 @@ function RideItem(props) {
   // will be using id to join, leave and delete ride
   function submitHandler(event) {
     event.preventDefault();
-    const id = props._id;
+    const id = props.id;
     const ride = { id };
+    console.log(props)
     props.submitHandler(ride,tokenContext);
   };
 
@@ -45,9 +46,9 @@ function RideItem(props) {
             {props.preferences}
           </p>
         </div>
-        <div className={classes.actions}>
+        {tokenContext!=="null"?<div className={classes.actions}>
           <button onClick={submitHandler}>{props.buttonText}</button>
-        </div>
+        </div>:null}
       </Card>
     </li>
   );

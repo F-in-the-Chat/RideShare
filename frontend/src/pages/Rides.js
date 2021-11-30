@@ -10,6 +10,13 @@ function joinRideHandler(ride,token) {
     });
 }
 
+function cancelRideHandler(ride,token) {
+  console.log(ride)
+  axios.post(`http://localhost:5007/cancelJoin`, { ride:ride.id,user:token }).catch((err) => {
+      console.log(err.message);
+  });
+}
+
 function Rides() {
   const [isLoading, setIsLoading] = useState(true);
   const [loadedRides, setLoadedRides] = useState([]);
@@ -49,7 +56,7 @@ function Rides() {
     <section>
       {tokenContext!="null"?<div>
         <h1>My Rides:</h1>
-        <RideList rides={[]} button={"Cancel Ride"} submitHandler={joinRideHandler}/>
+        <RideList rides={[]} button={"Cancel Ride"} submitHandler={cancelRideHandler}/>
       </div>:null}
       <h1>Available Rides: -</h1>
       <RideList rides={loadedRides} button={"Join Ride"} submitHandler={joinRideHandler}/>
