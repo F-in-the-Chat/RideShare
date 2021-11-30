@@ -3,6 +3,16 @@ import Card from "../ui/Card";
 import classes from "./RideItem.module.css";
 
 function RideItem(props) {
+
+  // will be using id to join, leave and delete ride
+  function submitHandler(event) {
+    event.preventDefault();
+    const id = props.id;
+    const ride = { id };
+    console.log(ride);
+    props.submitHandler(ride);
+  };
+
   return (
     <li className={classes.item}>
       <Card>
@@ -35,7 +45,7 @@ function RideItem(props) {
           </p>
         </div>
         <div className={classes.actions}>
-          <button>Join Ride</button>
+          <button onClick={submitHandler}>{props.buttonText}</button>
         </div>
       </Card>
     </li>
