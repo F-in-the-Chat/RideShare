@@ -101,11 +101,9 @@ async function cancelJoin(event) {
   console.log("Inside cancelJoin in db.js")
   console.log(event)
 
-  //TODO: HAVE TO REMOVE THE USER FROM THAT RIDE
-
-  // let ride = await Ride.findById(event.data.ride).exec();
-  // ride.riders.pop(event.data.user);
-  // ride.save();
+  let ride = await Ride.findById(event.data.ride).exec();
+  ride.riders = ride.riders.filter((rider)=>{rider!=event.data.user});
+  ride.save();
 }
 
 async function logging(event) {
