@@ -17,14 +17,10 @@ const UserSchema = mongoose.Schema({
     type: Boolean,
     default: false,
   },
-  tokens: [
-    {
-      token: {
-        type: String,
-        required: true,
-      },
-    },
-  ],
+  token: {
+    type: String,
+     required: false,
+  },
   tokenTimer: {
     type: Number,
     required: false,
@@ -47,7 +43,7 @@ UserSchema.pre("save", async function (next) {
 UserSchema.methods.generateToken = async function () {
   try {
     let generatedToken = jwt.sign({ _id: this._id }, jwtSecret);
-    this.tokens = this.tokens.concat({ token: generatedToken });
+    this.token = generatedToken
     await this.save();
     return generatedToken;
   } catch (err) {
