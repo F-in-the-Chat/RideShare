@@ -157,5 +157,4 @@ function deleteToken(event) {
   } catch (e) {
     console.log(e)
   }
-  info.save();
 }
