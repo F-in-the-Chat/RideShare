@@ -2,12 +2,14 @@ import { useState, useEffect } from "react";
 import RideList from "../component/rides/RideList";
 const axios = require("axios");
 
-function joinRideHandler(ride) {
-    axios.post("http://localhost:5001/joinRide", { ride }).catch((err) => {
+function cancelJoinHandler(ride) {
+    console.log("inside cancelJoinhandler")
+    axios.post("http://localhost:5007/cancelJoin", { ride }).catch((err) => {
         console.log(err.message);
     });
 }
 
+// TODO: HAVE TO CHANGE FETCH - SHOULD ONLY GET THE RIDES THAT THE USER JOINED
 function Rides() {
   const [isLoading, setIsLoading] = useState(true);
   const [loadedRides, setLoadedRides] = useState([]);
@@ -46,8 +48,8 @@ function Rides() {
   }
   return (
     <section>
-      <h1>Available Rides</h1>
-      <RideList rides={loadedRides} button={"Join Ride"} submitHandler={joinRideHandler}/>
+      <h1>Your Rides: - </h1>
+      <RideList rides={loadedRides} button={"Leave Ride"} submitHandler={cancelJoinHandler}/>
     </section>
   );
 }
