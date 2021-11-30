@@ -8,6 +8,7 @@ function RideList(props) {
       {props.rides.map((ride) => (
         <RideItem
           key={ride.id}
+          _id={ride._id}
           id={ride.id}
           title={ride.title}
           date={ride.date}
