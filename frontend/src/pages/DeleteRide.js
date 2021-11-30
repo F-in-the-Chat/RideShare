@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import SecondRideList from "../component/rides/SecondRideList";
+// import SecondRideList from "../component/rides/SecondRideList";
 const axios = require("axios");
 
 // HAVE TO EDIT THIS SUCH THAT WE GET THE RIDES MADE BY THE PARTICULAR USER - JUST DISPLAYING ALL RIDES FOR NOW
-// MIGHT HAVE TO LINK RIDES WITH USERS (ESPECIALLY DRIVERS) 
+// MIGHT HAVE TO LINK RIDES WITH USERS (ESPECIALLY DRIVERS)
 function DeleteRide() {
   const [isLoading, setIsLoading] = useState(true);
   const [loadedRides, setLoadedRides] = useState([]);
@@ -41,18 +41,16 @@ function DeleteRide() {
 
   function deleteRideHandler(ride) {
     // deleting ride using title name only
-    axios
-      .post("http://localhost:5006/deleteRide", { ride})
-      .catch((err) => {
-        console.log(err.message);
-      });
+    axios.post("http://localhost:5006/deleteRide", { ride }).catch((err) => {
+      console.log(err.message);
+    });
   }
 
   return (
-      <section>
-          <h1>Rides Created by You</h1>
-          <SecondRideList rides={loadedRides} deleteRide={deleteRideHandler}/>
-      </section>
+    <section>
+      <h1>Rides Created by You</h1>
+      {/* <SecondRideList rides={loadedRides} deleteRide={deleteRideHandler} /> */}
+    </section>
   );
 }
 
