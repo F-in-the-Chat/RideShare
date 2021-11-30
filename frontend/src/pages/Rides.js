@@ -3,6 +3,7 @@ import RideList from "../component/rides/RideList";
 const axios = require("axios");
 
 function joinRideHandler(ride) {
+    console.log("inside joinRideHandler")
     axios.post("http://localhost:5001/joinRide", { ride }).catch((err) => {
         console.log(err.message);
     });
@@ -46,7 +47,7 @@ function Rides() {
   }
   return (
     <section>
-      <h1>Available Rides</h1>
+      <h1>Available Rides: -</h1>
       <RideList rides={loadedRides} button={"Join Ride"} submitHandler={joinRideHandler}/>
     </section>
   );
