@@ -5,6 +5,7 @@ const axios = require("axios");
 
 function deleteRideHandler(ride) {
   // deleting ride using id only
+  console.log("inside deleteRideHandler")
   axios
     .post("http://localhost:5006/deleteRide", { ride })
     .catch((err) => {
@@ -13,7 +14,7 @@ function deleteRideHandler(ride) {
 }
 
 
-// HAVE TO EDIT THIS SUCH THAT WE GET THE RIDES MADE BY THE PARTICULAR USER - JUST DISPLAYING ALL RIDES FOR NOW
+// TODO: HAVE TO CHANGE FETCH - SHOULD ONLY GET THE RIDES THAT THE DRIVER CREATED
 // MIGHT HAVE TO LINK RIDES WITH USERS (ESPECIALLY DRIVERS) 
 function DeleteRide() {
   const [isLoading, setIsLoading] = useState(true);
@@ -52,7 +53,7 @@ function DeleteRide() {
 
   return (
       <section>
-          <h1>Rides Created by You</h1>
+          <h1>Rides Created by You: -</h1>
           <RideList rides={driverRides} submitHandler={deleteRideHandler} button={"Delete Ride"} />
       </section>
   );
