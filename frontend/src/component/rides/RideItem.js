@@ -1,16 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
+import TokenContext from "../../AppContext";
 import Card from "../ui/Card";
 import classes from "./RideItem.module.css";
 
 function RideItem(props) {
+  const {tokenContext,setToken} = useContext(TokenContext)
 
   // will be using id to join, leave and delete ride
   function submitHandler(event) {
     event.preventDefault();
     const id = props.id;
     const ride = { id };
-    console.log(ride);
-    props.submitHandler(ride);
+    props.submitHandler(ride,tokenContext);
   };
 
   return (

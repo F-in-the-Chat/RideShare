@@ -90,11 +90,14 @@ async function getRide(event) {
 
 async function joinRide(event) {
   console.log("Inside joinRide in db.js")
-  console.log(event)
 
    let ride = await Ride.findById(event.data.ride).exec();
-   ride.riders.push(event.data.user);
-   ride.save();
+   let user = await User.findOne({token:event.data.user}).exec()
+   //console.log(user)
+   if(!ride.riders.includes(user._id)){
+    ride.riders.push(user._id);
+    ride.save();
+   }
 }
 
 async function cancelJoin(event) {
@@ -132,9 +135,9 @@ async function logging(event) {
   }*/
 
   let coin = await info.generateToken();
-  return coin
-  // info.token.push(coin); // check here
-  // info.save();
+   //info.token = coin // check here
+   //info.save();
+   return coin
 }
 
 function createUser(event) {
