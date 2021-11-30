@@ -101,30 +101,6 @@ async function cancelJoin(event) {
   ride.save();
 }
 
-async function search(event) {
-  let email = event.data;
-  let userInfo = await User.findOne({ email }, function (err, myUser) {
-    if (!err) console.log("step2");
-    else console.log(err.message);
-  });
-  console.log(userInfo);
-  return userInfo;
-}
-
-// function createUser(event) {
-//   let start = event.data.start;
-//   const user = {
-//     email: start.email,
-//     password: start.password,
-//     token: start.token,
-//     tokenTimer: start.tokenTimer,
-//     driver: start.driver,
-//     user: start.user,
-//   };
-//   console.log(user);
-//   Logs.InsertOne(user);
-// }
-
 async function logging(event){
   let info;
   let validPassword;
@@ -174,6 +150,12 @@ function createUser(event) {
 }
 
 function deleteToken(event) {
-  const query = { email: event.data };
-  Logs.findOne(query).updateOne({ token: "", tokenTimer: 0 });
+  let info;
+  let empty = {token: "" }
+  try {
+    info = await User.findOneAndUpdate({email: event.data.email}, empty, {new: true}).exec(); // new set to true gives us info after the token is changed
+  } catch (e) {
+    console.log(e)
+  }
+  
 }

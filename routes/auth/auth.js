@@ -181,3 +181,12 @@ app.post("/login", (req, res) => {
     res.status(400).send(err);// invalid input
   }
 });
+
+app.post("/logout", (req, res) => {
+  try {
+    eventHelper.sendEvent("deleteToken", req.body);
+    res.status(200).send("Logout successful");
+  } catch (err) {
+    res.status(400).send(err);
+  }
+});

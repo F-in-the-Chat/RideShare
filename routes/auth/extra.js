@@ -77,6 +77,30 @@ function deleteToken(event){
   }
 
 
+  async function search(event) {
+    let email = event.data;
+    let userInfo = await User.findOne({ email }, function (err, myUser) {
+      if (!err) console.log("step2");
+      else console.log(err.message);
+    });
+    console.log(userInfo);
+    return userInfo;
+  }
+  
+  // function createUser(event) {
+  //   let start = event.data.start;
+  //   const user = {
+  //     email: start.email,
+  //     password: start.password,
+  //     token: start.token,
+  //     tokenTimer: start.tokenTimer,
+  //     driver: start.driver,
+  //     user: start.user,
+  //   };
+  //   console.log(user);
+  //   Logs.InsertOne(user);
+  // }
+
 /*  router.post("/login", [
     check("email", "Please provide valid email").isEmail(),
     check("password", "Password is required").exists(),
