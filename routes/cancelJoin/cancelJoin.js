@@ -1,11 +1,12 @@
 const express = require("express");
 const axios = require("axios");
 const app = express();
-const { MongoClient } = require("mongodb");
+const eventHelper = require("../../server/eventHelper");
+// const { MongoClient } = require("mongodb");
 const config = require("../appConfig.json")
 const port = config.ports.cancelJoin;
-const url = "mongodb+srv://testlogin.taf1q.mongodb.net/myFirstDatabase?authSource=%24external&authMechanism=MONGODB-X509&retryWrites=true&w=majority";
-const client = new MongoClient(url);
+// const url = "mongodb+srv://testlogin.taf1q.mongodb.net/myFirstDatabase?authSource=%24external&authMechanism=MONGODB-X509&retryWrites=true&w=majority";
+// const client = new MongoClient(url);
 const cors = require("cors");
 
 app.use(express.json());
@@ -39,7 +40,8 @@ app.listen(port, "0.0.0.0", () => {
 //   res.send({ status: "OK" });
 // });
 
-app.post("/", (req, res) => {
+app.post("/cancelJoin", (req, res) => {
+  console.log("inside /cancelJoin in cancelJoin.js")
   eventHelper.sendEvent(
     "cancelJoin",
     req.body
