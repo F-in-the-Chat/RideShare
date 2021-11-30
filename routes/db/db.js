@@ -159,7 +159,7 @@ async function deleteToken(event) {
   let info;
   let empty = {token: "" }
   try {
-    info = await User.findOneAndUpdate({email: event.data.email}, empty, {new: true}); // new set to true gives us info after the token is changed
+    info = await User.findOneAndUpdate({token: event.data.token}, empty, {new: true}); // new set to true gives us info after the token is changed
   } catch (e) {
     console.log(e)
   }
