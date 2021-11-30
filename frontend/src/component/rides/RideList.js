@@ -16,6 +16,8 @@ function RideList(props) {
           capacity={ride.capacity}
           price={ride.price}
           preferences={ride.preferences}
+          buttonText = {props.button}
+          submitHandler = {props.submitHandler}
         />
       ))}
     </ul>
