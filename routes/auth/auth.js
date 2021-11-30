@@ -172,14 +172,10 @@ app.post("/signup", (req, res) => {
 });
 
 app.post("/login", (req, res) => {
-  try {
     //check username if username exists in database, checks password
-    eventHelper.sendEvent("logging", req.body);
-    res.status(200).send("Login successful");
-    //console.log(info)
-  } catch (err) {
-    res.status(400).send(err);// invalid input
-  }
+    eventHelper.sendEvent("logging", req.body,(response)=>{
+      res.send(response.data.response_data)
+    });
 });
 
 app.post("/logout", (req, res) => {

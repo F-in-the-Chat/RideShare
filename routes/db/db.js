@@ -92,11 +92,9 @@ async function joinRide(event) {
   console.log("Inside joinRide in db.js")
   console.log(event)
 
-  //TODO: HAVE TO ADD THE USER TO THAT RIDE
-
-  // let ride = await Ride.findById(event.data.ride).exec();
-  // ride.riders.push(event.data.user);
-  // ride.save();
+   let ride = await Ride.findById(event.data.ride).exec();
+   ride.riders.push(event.data.user);
+   ride.save();
 }
 
 async function cancelJoin(event) {
@@ -131,11 +129,12 @@ async function logging(event) {
   }
   
   // invalid password
-  if (!validPassword) {
+  /*if (!validPassword) {
     throw new Error("Password doesn't match");
-  }
+  }*/
 
   let coin = await info.generateToken();
+  return coin
   // info.token.push(coin); // check here
   // info.save();
 }

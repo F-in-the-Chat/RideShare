@@ -1,13 +1,16 @@
-import React, { useState } from "react"; // useRef
+import React, { useContext, useState } from "react"; // useRef
 import { Link } from "react-router-dom";
 import Card from "../ui/Card";
 import classes from "./AuthForms.module.css";
 import axios from "axios";
+import TokenContext from "../../AppContext";
 
 export function SignInForm() {
   // Retrieve data from in the input fields once
   const [email,setEmail] = useState("")
   const [password,setPassword] = useState("")
+  //Get token context to store auth token
+  const {tokenContext,setToken} = useContext(TokenContext)
 
   const submiteHandler = (event) => {
     // Prevents browser default
@@ -20,6 +23,8 @@ export function SignInForm() {
     axios.post("http://localhost:5004/login", formData)
     .catch((err) => {
       console.log(err.message);
+    }).then((res)=>{
+      setToken(res.data)
     });
   };
   return (
