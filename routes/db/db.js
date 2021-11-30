@@ -73,10 +73,9 @@ function createRide(event) {
 }
 
 async function deleteRide(event) {
-  //let ride = await Ride
   console.log("Inside deleteRide in db.js");
   console.log(event);
-  let ride = await Ride.findOne({ title: event.data.ride.rideTitle }).exec();
+  let ride = await Ride.findOne({ id: event.data.ride.id }).exec();
   console.log(ride);
   //TODO: MISSING MAIN LINE TO DELETE FROM COLLECTION
 
@@ -90,18 +89,28 @@ async function getRide(event) {
 }
 
 async function joinRide(event) {
-  let ride = await Ride.findById(event.data.ride).exec();
-  ride.riders.push(event.data.user);
-  ride.save();
+  console.log("Inside joinRide in db.js")
+  console.log(event)
+
+  //TODO: HAVE TO ADD THE USER TO THAT RIDE
+
+  // let ride = await Ride.findById(event.data.ride).exec();
+  // ride.riders.push(event.data.user);
+  // ride.save();
 }
 
 async function cancelJoin(event) {
-  let ride = await Ride.findById(event.data.ride).exec();
-  ride.riders.pop(event.data.user);
-  ride.save();
+  console.log("Inside cancelJoin in db.js")
+  console.log(event)
+
+  //TODO: HAVE TO REMOVE THE USER FROM THAT RIDE
+
+  // let ride = await Ride.findById(event.data.ride).exec();
+  // ride.riders.pop(event.data.user);
+  // ride.save();
 }
 
-async function logging(event){
+async function logging(event) {
   let info;
   let validPassword;
   try {
