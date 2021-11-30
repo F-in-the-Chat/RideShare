@@ -53,7 +53,7 @@ function DeleteRide() {
   return (
       <section>
           <h1>Rides Created by You</h1>
-          <RideList rides={driverRides} deleteRide={deleteRideHandler} button={"Delete Ride"} />
+          <RideList rides={driverRides} submitHandler={deleteRideHandler} button={"Delete Ride"} />
       </section>
   );
 }
