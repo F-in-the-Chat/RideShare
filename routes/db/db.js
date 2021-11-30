@@ -75,12 +75,13 @@ function createRide(event) {
 async function deleteRide(event) {
   console.log("Inside deleteRide in db.js");
   console.log(event);
-  let ride = await Ride.findOne({ id: event.data.ride.id }).exec();
-  console.log(ride);
-  //TODO: MISSING MAIN LINE TO DELETE FROM COLLECTION
-
-  // db.collection("rides").deleteOne(ride);
-  // ride.save();
+  try {
+    await Ride.findByIdAndDelete(event.data.ride.id)
+    return {STATUS: 'OK'}
+  } catch (e) {
+    console.log(e)
+    return {ERROR: e}
+  }
 }
 
 async function getRide(event) {
