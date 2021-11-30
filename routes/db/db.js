@@ -88,6 +88,7 @@ async function getRide(event) {
   return rides;
 }
 
+// joinRide - requires rideId and tokenId - tokenId will be converted to userId
 async function joinRide(event) {
   console.log("Inside joinRide in db.js")
   console.log(event)
@@ -97,6 +98,7 @@ async function joinRide(event) {
    ride.save();
 }
 
+// cancelJoin - requires rideId and tokenId - tokenId will be converted to userId
 async function cancelJoin(event) {
   console.log("Inside cancelJoin in db.js")
   console.log(event)
