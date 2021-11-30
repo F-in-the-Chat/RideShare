@@ -149,7 +149,7 @@ function createUser(event) {
   return { TEST: "DATA" };
 }
 
-function deleteToken(event) {
+async function deleteToken(event) {
   let info;
   let empty = {token: "" }
   try {
