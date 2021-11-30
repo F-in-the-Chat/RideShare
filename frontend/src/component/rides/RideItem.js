@@ -9,7 +9,7 @@ function RideItem(props) {
   // will be using id to join, leave and delete ride
   function submitHandler(event) {
     event.preventDefault();
-    const id = props.id;
+    const id = props._id;
     const ride = { id };
     props.submitHandler(ride,tokenContext);
   };

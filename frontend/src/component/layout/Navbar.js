@@ -24,7 +24,7 @@ function Navbar() {
             <Link to="/delete-ride">Delete Rides</Link>
           </li>
           <li>
-            {tokenContext=="null"?<Link to="/login">Log In</Link>:<a onClick={()=>{setToken("null")}}>Log Out</a>}
+            {tokenContext==="null"?<Link to="/login">Log In</Link>:<a onClick={()=>{setToken("null")}}>Log Out</a>}
           </li>
         </ul>
       </nav>
