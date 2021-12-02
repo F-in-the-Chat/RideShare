@@ -115,17 +115,23 @@ async function logging(event) {
   let validPassword;
   try {
     info = await User.findOne({email: event.data.email}).exec();
+    if (!info){
+      throw new Error("User doesn't exist");
+    }
   } catch (e) {
     console.log(e)
   }
   
   // email does not exist
-  if (!info){
+  /* if (!info){
     throw new Error("User doesn't exist");
-  }
+  } */
   
   try {
     validPassword = await bcrypt.compare(event.data.password, info.password);
+    if (!validPassword) {
+      throw new Error("Password doesn't match");
+    }
   } catch (e) {
     console.log(e)
   }
@@ -141,21 +147,32 @@ async function logging(event) {
    return coin
 }
 
-function createUser(event) {
+async function createUser(event) {
   console.log(event.data.email);
-
-  const user = new User({
-    email: event.data.email,
-    password: event.data.password,
-    driver: event.data.driver,
-  });
-
-  user
-    .save()
-    .then((data) => {})
-    .catch((err) => {
-      console.log(err);
-    });
+  
+  let info;
+  try {
+    info = await User.findOne({email: event.data.email}).exec();
+    if (info){
+      throw new Error("User exist");
+    }
+    else{
+      const user = new User({
+      email: event.data.email,
+      password: event.data.password,
+      driver: event.data.driver,
+      });
+  
+      user
+        .save()
+        .then((data) => {})
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  } catch (e) {
+    console.log(e)
+  }
   return { TEST: "DATA" };
 }
 
