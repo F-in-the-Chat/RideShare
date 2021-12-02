@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import TokenContext from "../../AppContext";
@@ -6,6 +7,10 @@ import classes from "./Navbar.module.css";
 
 function Navbar() {
   const {tokenContext,setToken} = useContext(TokenContext)
+  function Logout(){
+    axios.post("http://localhost:5004/logout",{token:tokenContext})
+    setToken("null")
+  }
   return (
     <header className={classes.header}>
       <div className={classes.logo}>Reliable Rides</div>
@@ -24,7 +29,7 @@ function Navbar() {
             <Link to="/delete-ride">Delete Rides</Link>
           </li>
           <li>
-            {tokenContext==="null"?<Link to="/login">Log In</Link>:<a onClick={()=>{setToken("null")}}>Log Out</a>}
+            {tokenContext==="null"?<Link to="/login">Log In</Link>:<a onClick={Logout}>Log Out</a>}
           </li>
         </ul>
       </nav>
