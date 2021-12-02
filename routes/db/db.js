@@ -130,6 +130,7 @@ async function logging(event) {
   
   try {
     validPassword = await bcrypt.compare(event.data.password, info.password);
+    console.log(validPassword)
     if (!validPassword) {
       throw new Error("Password doesn't match");
     }
