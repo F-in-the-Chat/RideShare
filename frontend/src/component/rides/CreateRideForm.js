@@ -1,6 +1,7 @@
-import React, { useRef } from "react";
+import React, { useRef, useContext } from "react";
 import Card from "../ui/Card";
 import classes from "./CreateRideForm.module.css";
+import TokenContext from "../../AppContext";
 
 function CreateRideForm(props) {
   // Retrieve data from in the input fields once
@@ -11,6 +12,7 @@ function CreateRideForm(props) {
   const capacityElRef = useRef();
   const priceElRef = useRef();
   const preferencesElRef = useRef();
+  const { tokenContext, setToken } = useContext(TokenContext);
 
   const submiteHandler = (event) => {
     // Prevents browser default
@@ -25,7 +27,8 @@ function CreateRideForm(props) {
 
     const ride = { title, date, pickup, dropoff, capacity, price, preferences };
     console.log(ride);
-    props.onCreateRide(ride);
+    console.log("My token: " + tokenContext);
+    props.onCreateRide(ride, tokenContext);
   };
   return (
     <Card>
