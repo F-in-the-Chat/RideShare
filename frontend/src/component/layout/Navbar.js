@@ -24,12 +24,14 @@ function Navbar() {
             <Link to="/delete-ride">Delete Rides</Link>
           </li>
           <li>
-            {tokenContext==="null"?<Link to="/login">Log In</Link>:<a onClick={()=>{setToken("null")}}>Log Out</a>}
+            {tokenContext===""?<Link to="/login">Log In</Link>:<a onClick={()=>{setToken("")}}>Log Out</a>}
           </li>
         </ul>
       </nav>
     </header>
   );
 }
+
+// line 27 "null" changed to ""
 
 export default Navbar;
