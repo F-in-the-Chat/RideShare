@@ -21,6 +21,7 @@ const eventHandlers = {
   getRide: getRide,
   joinRide: joinRide,
   cancelJoin: cancelJoin,
+  getUserRides: getUserRides,
 };
 
 app.listen(port, "0.0.0.0", () => {
@@ -98,6 +99,8 @@ async function joinRide(event) {
    if(!ride.riders.includes(user._id)){
     ride.riders.push(user._id);
     ride.save();
+    user.rides.push(event.data.ride);
+   user.save();
    }
 }
 
@@ -113,7 +116,7 @@ async function cancelJoin(event) {
 async function logging(event) {
   let info;
   let validPassword;
-  console.log(event)
+  //console.log(event)
   try {
     info = await User.findOne({email: event.data.email}).exec();
     if (!info){
@@ -185,4 +188,11 @@ async function deleteToken(event) {
   } catch (e) {
     console.log(e)
   }
+}
+
+async function getUserRides(event){
+  let user = await User.findOne({token:event.data.user}).exec()
+  let rides = user.rides
+  let rideData = await Ride.find({_id:{$in:rides}}).exec()
+  return rideData
 }

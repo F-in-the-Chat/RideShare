@@ -28,7 +28,13 @@ app.get("/getRide", (req, res) => {
   })
 });
 
+app.post("/getRides", (req, res) => {
+  eventHelper.sendEvent("getUserRides",req.body,(resp)=>{
+    res.send(resp.data.response_data)
+  })
+});
+
 app.post("/events", (req, res) => {
-  console.log(req.body);
+  //console.log(req.body);
   res.send({ status: "OK" });
 });

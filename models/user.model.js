@@ -25,6 +25,11 @@ const UserSchema = mongoose.Schema({
     type: Number,
     required: false,
   },
+  rides:{
+    type: Array,
+    required:false,
+    default:[],
+  },
   //   userId:{
   //       type: Number,
   //       required: true
