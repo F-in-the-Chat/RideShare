@@ -24,7 +24,7 @@ export function SignInForm() {
     .catch((err) => {
       console.log(err.message);
     }).then((res)=>{
-      setToken(res.data)
+      setToken(res.data) // token is stored?
     });
   };
   return (
