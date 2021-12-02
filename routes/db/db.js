@@ -113,6 +113,7 @@ async function cancelJoin(event) {
 async function logging(event) {
   let info;
   let validPassword;
+  console.log(event)
   try {
     info = await User.findOne({email: event.data.email}).exec();
     if (!info){
