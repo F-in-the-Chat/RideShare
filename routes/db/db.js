@@ -52,7 +52,10 @@ function testEventHandler(event) {
   });
 }
 
-function createRide(event) {
+async function createRide(event) {
+  console.log(event);
+  let user = await User.findOne({ token: event.data.token }).exec();
+  console.log(user);
   const ride = new Ride({
     title: event.data.ride.title,
     date: event.data.ride.date,
@@ -61,6 +64,7 @@ function createRide(event) {
     capacity: event.data.ride.capacity,
     price: event.data.ride.price,
     preferences: event.data.ride.preferences,
+    creator: user,
   });
   //Save Ride in the database
   ride
@@ -76,11 +80,11 @@ async function deleteRide(event) {
   console.log("Inside deleteRide in db.js");
   console.log(event);
   try {
-    await Ride.findByIdAndDelete(event.data.ride.id)
-    return {STATUS: 'OK'}
+    await Ride.findByIdAndDelete(event.data.ride.id);
+    return { STATUS: "OK" };
   } catch (e) {
-    console.log(e)
-    return {ERROR: e}
+    console.log(e);
+    return { ERROR: e };
   }
 }
 
@@ -91,80 +95,80 @@ async function getRide(event) {
 
 // joinRide - requires rideId and tokenId - tokenId will be converted to userId
 async function joinRide(event) {
-  console.log("Inside joinRide in db.js")
+  console.log("Inside joinRide in db.js");
 
-   let ride = await Ride.findById(event.data.ride).exec();
-   let user = await User.findOne({token:event.data.user}).exec()
-   if(!ride.riders.includes(user._id)){
+  let ride = await Ride.findById(event.data.ride).exec();
+  let user = await User.findOne({ token: event.data.user }).exec();
+  if (!ride.riders.includes(user._id)) {
     ride.riders.push(user._id);
     ride.save();
-   }
+  }
 }
 
 // cancelJoin - requires rideId and tokenId - tokenId will be converted to userId
 async function cancelJoin(event) {
-
   let ride = await Ride.findById(event.data.ride).exec();
-  let user = await User.findOne({token:event.data.user}).exec()
-  ride.riders = ride.riders.filter((rider)=>{rider!=user._id});
+  let user = await User.findOne({ token: event.data.user }).exec();
+  ride.riders = ride.riders.filter((rider) => {
+    rider != user._id;
+  });
   ride.save();
 }
 
 async function logging(event) {
   let info;
   let validPassword;
-  console.log(event)
+  console.log(event);
   try {
-    info = await User.findOne({email: event.data.email}).exec();
-    if (!info){
+    info = await User.findOne({ email: event.data.email }).exec();
+    if (!info) {
       throw new Error("User doesn't exist");
     }
   } catch (e) {
-    console.log(e)
+    console.log(e);
   }
-  
+
   // email does not exist
   /* if (!info){
     throw new Error("User doesn't exist");
   } */
-  
+
   try {
     validPassword = await bcrypt.compare(event.data.password, info.password);
-    console.log(validPassword)
+    console.log(validPassword);
     if (!validPassword) {
       throw new Error("Password doesn't match");
     }
   } catch (e) {
-    console.log(e)
+    console.log(e);
   }
-  
+
   // invalid password
   /*if (!validPassword) {
     throw new Error("Password doesn't match");
   }*/
 
   let coin = await info.generateToken();
-   //info.token = coin // check here
-   //info.save();
-   return coin
+  //info.token = coin // check here
+  //info.save();
+  return coin;
 }
 
 async function createUser(event) {
   console.log(event.data.email);
-  
+
   let info;
   try {
-    info = await User.findOne({email: event.data.email}).exec();
-    if (info){
+    info = await User.findOne({ email: event.data.email }).exec();
+    if (info) {
       throw new Error("User exist");
-    }
-    else{
+    } else {
       const user = new User({
-      email: event.data.email,
-      password: event.data.password,
-      driver: event.data.driver,
+        email: event.data.email,
+        password: event.data.password,
+        driver: event.data.driver,
       });
-  
+
       user
         .save()
         .then((data) => {})
@@ -173,17 +177,19 @@ async function createUser(event) {
         });
     }
   } catch (e) {
-    console.log(e)
+    console.log(e);
   }
   return { TEST: "DATA" };
 }
 
 async function deleteToken(event) {
   let info;
-  let empty = {token: "" }
+  let empty = { token: "" };
   try {
-    info = await User.findOneAndUpdate({token: event.data.token}, empty, {new: true}); // new set to true gives us info after the token is changed
+    info = await User.findOneAndUpdate({ token: event.data.token }, empty, {
+      new: true,
+    }); // new set to true gives us info after the token is changed
   } catch (e) {
-    console.log(e)
+    console.log(e);
   }
 }
