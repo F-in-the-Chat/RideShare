@@ -30,7 +30,7 @@ function Navbar() {
               <Link to="/delete-ride">Delete Rides</Link>
             </li>
             <li>
-              <Link to="#" onClick={Logout}>Log Out</Link>
+              <Link to="/login" onClick={Logout}>Log Out</Link>
             </li>
           </ul>
           :
