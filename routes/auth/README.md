@@ -15,36 +15,23 @@
 #### The login request is as follows:
 
 ```
-query{
-    login(email:"gg@gmail.com", password:"getrekt") {
-        userId
-        token
-        tokenExpiration
-    }
-}
-
-mutation{
-  createUser(userInput: {email:"gg@gmail.com", password:"getrekt", driver: True}) {
-    userId
-    email
-  }
-}
-{
-  "errors": 
-  [{"message": "User already exists."}]
-} 
+app.post("/login", (req, res) => {
+    //check username if username exists in database, checks password
+    eventHelper.sendEvent("logging", req.body,(response)=>{
+      res.send(response.data.response_data)
+    });
+});
 ```
 
 #### Once this information is taken, the data is then passed and stored in the following format:
 
 ```
 {
-    "email": "gg@gmail.com",
-    "password": "getrekt",
-    "token": "asdjhiowwandjncei72q98erhfdjsbaw",
-    "tokenExpiration": 2,
-    driver: True,
-    "userId": 007
+    {"_id":{"$oid":"61a9239fae5dcce8c0a0bead"},
+    "email":"1234@gmail.com",
+    "password":"$2a$10$06iawG6C/PytfZGDKkdtjOeb6nHavRMzpiQpsW8X6Zx5lwmhI3d3W",
+    "driver":false,"__v":{"$numberInt":"0"},
+    "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWE5MjM5ZmFlNWRjY2U4YzBhMGJlYWQiLCJpYXQiOjE2Mzg0NzUyODZ9.sLcRCTNhs3H5wmIwyohuS53nESn0FCbviEj79SLGPwg"}
 }
 ```
 

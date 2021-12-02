@@ -5,24 +5,13 @@ const axios = require("axios");
 
 function CreateRide() {
   const history = useHistory();
-  function createRideHandler(ride) {
-    // fetch("http://localhost:5003/createRide", {
-    //   method: "POST",
-    //   body: JSON.stringify(ride),
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    // }).then(() => {
-    //   // It should to /rides but as of now the default page is / so it'll go there
-    //   history.replace("/rides");
-    // });
+  function createRideHandler(ride, token) {
     axios
-      .post("http://localhost:5003/createRide", { ride })
+      .post("http://localhost:5003/createRide", { ride, token })
       .catch((err) => {
         console.log(err.message);
       })
       .then(() => {
-        // It should to /rides but as of now the default page is / so it'll go there
         history.replace("/rides");
       });
   }

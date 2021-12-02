@@ -33,10 +33,15 @@ app.post("/signup", (req, res) => {
 });
 
 app.post("/login", (req, res) => {
-    //check username if username exists in database, checks password
-    eventHelper.sendEvent("logging", req.body,(response)=>{
-      res.send(response.data.response_data)
+  //check username if username exists in database, checks password
+  try {
+    eventHelper.sendEvent("logging", req.body, (response) => {
+      res.send(response.data.response_data);
     });
+    res.status(200).send("Login successful");
+  } catch (err) {
+    res.status(400).send(err);
+  }
 });
 
 app.post("/logout", (req, res) => {
