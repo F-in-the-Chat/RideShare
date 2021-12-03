@@ -43,3 +43,6 @@
   background-color: rgb(80, 29, 80);
   border-color: rgb(80, 29, 80);
 }
+.formError{
+  border: red solid 2px !important;
+}

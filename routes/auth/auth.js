@@ -38,7 +38,7 @@ app.post("/login", (req, res) => {
     eventHelper.sendEvent("logging", req.body, (response) => {
       res.send(response.data.response_data);
     });
-    res.status(200).send("Login successful");
+    //res.status(200).send("Login successful");
   } catch (err) {
     res.status(400).send(err);
   }

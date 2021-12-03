@@ -125,15 +125,16 @@ async function logging(event) {
   try {
     info = await User.findOne({ email: event.data.email }).exec();
     if (!info) {
-      throw new Error("User doesn't exist");
+      return("Invalid Username")
+      //throw new Error("User doesn't exist");
     }
     validPassword = await bcrypt.compare(event.data.password, info.password);
-    console.log(validPassword);
+    //console.log(validPassword);
     if (!validPassword) {
-      throw new Error("Password doesn't match");
+      return("Invalid Password")
+      //throw new Error("Password doesn't match");
     }
     let coin = await info.generateToken();
-    console.log(coin)
     return coin;
   } catch (e) {
     console.log(e);
