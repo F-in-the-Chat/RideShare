@@ -127,34 +127,17 @@ async function logging(event) {
     if (!info) {
       throw new Error("User doesn't exist");
     }
-  } catch (e) {
-    console.log(e);
-  }
-
-  // email does not exist
-  /* if (!info){
-    throw new Error("User doesn't exist");
-  } */
-
-  try {
     validPassword = await bcrypt.compare(event.data.password, info.password);
     console.log(validPassword);
     if (!validPassword) {
       throw new Error("Password doesn't match");
     }
+    let coin = await info.generateToken();
+    console.log(coin)
+    return coin;
   } catch (e) {
     console.log(e);
   }
-
-  // invalid password
-  /*if (!validPassword) {
-    throw new Error("Password doesn't match");
-  }*/
-
-  let coin = await info.generateToken();
-  //info.token = coin // check here
-  //info.save();
-  return coin;
 }
 
 async function createUser(event) {
