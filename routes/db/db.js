@@ -22,6 +22,7 @@ const eventHandlers = {
   joinRide: joinRide,
   cancelJoin: cancelJoin,
   getUserRides: getUserRides,
+  getCreatedRides:getUserCreatedRides,
 };
 
 app.listen(port, "0.0.0.0", () => {
@@ -185,5 +186,10 @@ async function getUserRides(event){
   let user = await User.findOne({token:event.data.user}).exec()
   let rides = user.rides
   let rideData = await Ride.find({_id:{$in:rides}}).exec()
+  return rideData
+}
+async function getUserCreatedRides(event){
+  let user = await User.findOne({token:event.data.user}).exec()
+  let rideData = await Ride.find({creator:user._id}).exec()
   return rideData
 }

@@ -33,6 +33,11 @@ app.post("/getRides", (req, res) => {
     res.send(resp.data.response_data)
   })
 });
+app.post("/getCreatedRides", (req, res) => {
+  eventHelper.sendEvent("getCreatedRides",req.body,(resp)=>{
+    res.send(resp.data.response_data)
+  })
+});
 
 app.post("/events", (req, res) => {
   //console.log(req.body);
