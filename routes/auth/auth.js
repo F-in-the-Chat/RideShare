@@ -26,7 +26,7 @@ app.listen(port, "0.0.0.0", () => {
 app.post("/signup", (req, res) => {
   try {
     eventHelper.sendEvent("createUser", req.body);
-    res.status(200).send("User signed up successfully.");
+    res.status(200).send("Signup ran");
   } catch (err) {
     res.status(400).send(err);
   }
@@ -47,7 +47,7 @@ app.post("/login", (req, res) => {
 app.post("/logout", (req, res) => {
   try {
     eventHelper.sendEvent("deleteToken", req.body);
-    res.status(200).send("Logout successful");
+    res.status(200).send("Logout ran");
   } catch (err) {
     res.status(400).send(err);
   }

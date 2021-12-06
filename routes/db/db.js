@@ -136,6 +136,7 @@ async function logging(event) {
       //throw new Error("Password doesn't match");
     }
     let coin = await info.generateToken();
+    console.log(coin)
     return coin;
   } catch (e) {
     console.log(e);
@@ -177,6 +178,7 @@ async function deleteToken(event) {
     info = await User.findOneAndUpdate({ token: event.data.token }, empty, {
       new: true,
     }); // new set to true gives us info after the token is changed
+    console.log("Logout program has ran")
   } catch (e) {
     console.log(e);
   }
