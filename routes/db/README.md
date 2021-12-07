@@ -1,6 +1,6 @@
 ## Database Microservice
 
-### 1. Developer Name - Roshan Praveen Shetty, Jared Pina, Eric Lee
+### 1. Developer Name - Roshan Praveen Shetty, Jared Pina, Eric Lee, Rishab Maheshwari
 
 ### 2. Overview of service: 
 
@@ -12,11 +12,15 @@
 const eventHandlers = {
   test: testEventHandler,
   createRide: createRide,
-  Search: search,
+  logging: logging,
   createUser: createUser,
   deleteToken: deleteToken,
+  deleteRide: deleteRide,
   getRide: getRide,
-  "joinRide":joinRide,
+  joinRide: joinRide,
+  cancelJoin: cancelJoin,
+  getUserRides: getUserRides,
+  getCreatedRides:getUserCreatedRides,
 };
 
 app.listen(port, "0.0.0.0", () => {
