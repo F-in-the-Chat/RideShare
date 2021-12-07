@@ -82,7 +82,7 @@ async function deleteRide(event) {
   console.log("Inside deleteRide in db.js");
   console.log(event);
   try {
-    await Ride.findByIdAndDelete(event.data.ride.id);
+    await Ride.findByIdAndDelete(event.data.ride);
     return { STATUS: "OK" };
   } catch (e) {
     console.log(e);
@@ -105,7 +105,7 @@ async function joinRide(event) {
     ride.riders.push(user._id);
     ride.save();
     user.rides.push(event.data.ride);
-   user.save();
+    user.save();
    }
 }
 
@@ -117,6 +117,8 @@ async function cancelJoin(event) {
     rider != user._id;
   });
   ride.save();
+  user.rides.pop(event.data.ride);
+  user.save();
 }
 
 async function logging(event) {
