@@ -23,12 +23,12 @@ function Navbar() {
             <li>
               <Link to="/create-ride">Create Ride</Link>
             </li>
-            <li>
+            {/* <li>
               <Link to="/joined-rides">Joined Rides</Link>
             </li>
             <li>
               <Link to="/delete-ride">Delete Rides</Link>
-            </li>
+            </li> */}
             <li>
               <Link to="/login" onClick={Logout}>Log Out</Link>
             </li>
