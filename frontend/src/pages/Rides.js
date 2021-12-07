@@ -23,7 +23,7 @@ function cancelRideHandler(ride, token) {
 function deleteRideHandler(ride, token) {
   console.log(ride);
   axios
-    .post(`http://localhost:5006/deleteRide`, { ride: ride.id, user: token })
+    .post(`http://rs.res.tf:5006/deleteRide`, { ride: ride.id, user: token })
     .catch((err) => {
       console.log(err.message);
     });

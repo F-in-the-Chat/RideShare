@@ -7,7 +7,7 @@ function deleteRideHandler(ride) {
   // deleting ride using id only
   console.log("inside deleteRideHandler")
   axios
-    .post("http://localhost:5006/deleteRide", { ride })
+    .post("http://rs.res.tf:5006/deleteRide", { ride })
     .catch((err) => {
       console.log(err.message);
     });
