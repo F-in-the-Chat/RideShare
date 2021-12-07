@@ -10,10 +10,10 @@ app.use(express.json());
 app.use(cors());
 
 app.listen(port, "0.0.0.0", () => {
-  console.log(`Create Ride Service listening at http://localhost:${port}`);
+  console.log(`Create Ride Service listening at http://rs.res.tf:${port}`);
   axios
-    .post("http://localhost:5002/subscribe", {
-      address: `http://localhost:${port}/events`,
+    .post("http://rs.res.tf:5002/subscribe", {
+      address: `http://rs.res.tf:${port}/events`,
       events: ["example"],
     })
     .catch((err) => {

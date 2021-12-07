@@ -26,7 +26,7 @@ const eventHandlers = {
 };
 
 app.listen(port, "0.0.0.0", () => {
-  console.log(`Database listening at http://localhost:${port}`);
+  console.log(`Database listening at http://rs.res.tf:${port}`);
 });
 
 app.post("/events", eventHandler);
