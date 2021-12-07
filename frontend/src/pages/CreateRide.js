@@ -7,7 +7,7 @@ function CreateRide() {
   const history = useHistory();
   function createRideHandler(ride, token) {
     axios
-      .post("http://localhost:5003/createRide", { ride, token })
+      .post("http://rs.res.tf:5003/createRide", { ride, token })
       .catch((err) => {
         console.log(err.message);
       })
