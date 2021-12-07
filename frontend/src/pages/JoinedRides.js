@@ -4,7 +4,7 @@ const axios = require("axios");
 
 function cancelJoinHandler(ride) {
     console.log("inside cancelJoinhandler")
-    axios.post("http://localhost:5007/cancelJoin", { ride }).catch((err) => {
+    axios.post("http://rs.res.tf:5007/cancelJoin", { ride }).catch((err) => {
         console.log(err.message);
     });
 }
@@ -15,7 +15,7 @@ function Rides() {
   const [loadedRides, setLoadedRides] = useState([]);
   useEffect(() => {
     setIsLoading(true);
-    fetch("http://localhost:5005/getRide")
+    fetch("http://rs.res.tf:5005/getRide")
       .then((res) => {
         return res.json();
       })

@@ -8,7 +8,7 @@ import classes from "./Navbar.module.css";
 function Navbar() {
   const {tokenContext,setToken} = useContext(TokenContext)
   function Logout(){
-    axios.post("http://localhost:5004/logout",{token:tokenContext})
+    axios.post("http://rs.res.tf:5004/logout",{token:tokenContext})
     setToken("null")
   }
   return (

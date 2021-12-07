@@ -7,22 +7,22 @@ app.use(express.json());
 
 //JS Object containing the events and addresses intrested in the events in the format {event:[address1,address2,...]}
 //Add default addresses here
-let event_subs = {"example":["http://localhost:5003/events"],
-  "test":["http://localhost:5000/events"],
-  "createRide":["http://localhost:5000/events"],
-  "logging":["http://localhost:5000/events"],
-  "createUser":["http://localhost:5000/events"],
-  "deleteToken":["http://localhost:5000/events"],
-  "deleteRide":["http://localhost:5000/events"],
-  "getRide":["http://localhost:5000/events"],
-  "joinRide":["http://localhost:5000/events"],
-  "cancelJoin":["http://localhost:5000/events"],
-  "getUserRides":["http://localhost:5000/events"],
-  "getCreatedRides":["http://localhost:5000/events"],
+let event_subs = {"example":["http://rs.res.tf:5003/events"],
+  "test":["http://rs.res.tf:5000/events"],
+  "createRide":["http://rs.res.tf:5000/events"],
+  "logging":["http://rs.res.tf:5000/events"],
+  "createUser":["http://rs.res.tf:5000/events"],
+  "deleteToken":["http://rs.res.tf:5000/events"],
+  "deleteRide":["http://rs.res.tf:5000/events"],
+  "getRide":["http://rs.res.tf:5000/events"],
+  "joinRide":["http://rs.res.tf:5000/events"],
+  "cancelJoin":["http://rs.res.tf:5000/events"],
+  "getUserRides":["http://rs.res.tf:5000/events"],
+  "getCreatedRides":["http://rs.res.tf:5000/events"],
 };
 
 app.listen(port, "0.0.0.0", () => {
-  console.log(`Event Bus listening at http://localhost:${port}`);
+  console.log(`Event Bus listening at http://rs.res.tf:${port}`);
 });
 
 /*Endpoint that recieves events and relays them to relevent microservices

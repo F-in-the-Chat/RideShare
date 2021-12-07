@@ -6,7 +6,7 @@ const axios = require("axios");
 function joinRideHandler(ride, token) {
   console.log("inside joinRideHandler");
   axios
-    .post("http://localhost:5001/joinRide", { ride: ride.id, user: token })
+    .post("http://rs.res.tf:5001/joinRide", { ride: ride.id, user: token })
     .catch((err) => {
       console.log(err.message);
     });
@@ -15,7 +15,7 @@ function joinRideHandler(ride, token) {
 function cancelRideHandler(ride, token) {
   console.log(ride);
   axios
-    .post(`http://localhost:5007/cancelJoin`, { ride: ride.id, user: token })
+    .post(`http://rs.res.tf:5007/cancelJoin`, { ride: ride.id, user: token })
     .catch((err) => {
       console.log(err.message);
     });
@@ -57,7 +57,7 @@ function Rides() {
         console.log(err.message);
       });
     axios
-      .post("http://localhost:5005/getCreatedRides", data)
+      .post("http://rs.res.tf:5005/getCreatedRides", data)
       .then((data) => {
         let rides = data.data;
         let userRides = [];

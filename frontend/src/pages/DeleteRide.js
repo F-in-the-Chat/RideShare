@@ -21,7 +21,7 @@ function DeleteRide() {
   const [driverRides, setLoadedRides] = useState([]);
   useEffect(() => {
     setIsLoading(true);
-    fetch("http://localhost:5005/getRide")
+    fetch("http://rs.res.tf:5005/getRide")
       .then((res) => {
         return res.json();
       })
